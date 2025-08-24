@@ -1,5 +1,5 @@
 import App from "@/App";
-import About from "@/pages/About";
+import { Home } from "lucide-react";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -8,8 +8,8 @@ export const router = createBrowserRouter([
         path: "/",
         children: [
             {
-                Component: About,
-                path: "/about",
+                Component: Home,
+                path: "/",
             }
         ]
     },

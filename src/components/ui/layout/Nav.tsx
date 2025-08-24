@@ -4,6 +4,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { Link } from "react-router";
 import { Button } from "../button";
 import UserMenu from "@/components/user-menu";
+import Logo from "@/assets/icon/Logo";
 
 const Nav = () => {
     const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ const Nav = () => {
             <div className="flex items-center justify-between py-4 md:px-10 px-7">
                 {/* Logo */}
                 <div className="font-bold text-2xl cursor-pointer text-red-600">
-                    RIBook
+                    <Logo/>
                 </div>
 
                 {/* Desktop & Mobile Links */}
