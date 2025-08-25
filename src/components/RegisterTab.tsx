@@ -2,12 +2,12 @@ import Rider from "../assets/images/Rider.png";
 import Driver from "../assets/images/Driver.png";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import RiderLogin from "./ui/layout/RiderLogin";
-import DriverLogin from "./ui/layout/DriverLogin";
+import RiderRegister from "./ui/layout/RiderRegister";
+import DriverRegister from "./ui/layout/DriverRegister";
 
-export default function LoginTab() {
+export default function RegisterTab() {
   return (
-    <Tabs defaultValue="tab-1" className="h-screen">
+    <Tabs defaultValue="tab-1" className=" h-screen">
       <ScrollArea>
         <TabsList className="mb-3 gap-4 bg-transparent">
           <TabsTrigger
@@ -29,11 +29,11 @@ export default function LoginTab() {
       </ScrollArea>
 
       <TabsContent value="tab-1" className="w-full h-full">
-        <RiderLogin />
+       <RiderRegister/>
       </TabsContent>
 
       <TabsContent value="tab-2" className="w-full h-full">
-        <DriverLogin/>
+        <DriverRegister/>
       </TabsContent>
     </Tabs>
   );
