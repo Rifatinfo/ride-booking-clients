@@ -24,6 +24,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const teams = ["Acme Inc.", "Origin UI", "Junon"]
 
 // Navigation links array to be used in both desktop and mobile menus

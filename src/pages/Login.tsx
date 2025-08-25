@@ -1,4 +1,4 @@
-import LoginTab from "@/components/loginTab";
+import LoginTab from "@/components/LoginTab";
 
 const Login = () => {
   return (
