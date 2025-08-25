@@ -9,7 +9,7 @@ import {
 
 import {
   Avatar,
-  AvatarFallback,
+  // AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -28,9 +28,9 @@ export default function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-          <Avatar>
-            <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+          <Avatar className="w-10 h-10">
+            <AvatarImage src="https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?t=st=1756051695~exp=1756055295~hmac=68bc8506673a7be1c6a402c83987f593d4ee7e515370e106063c97a9c7eca9b4&w=1480" alt="Profile image" />
+            {/* <AvatarFallback>KK</AvatarFallback> */}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
