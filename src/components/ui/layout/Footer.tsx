@@ -2,11 +2,12 @@ import Logo from "@/assets/icon/Logo";
 import footerImage from "../../../assets/images/city-skiline.png"
 import footerImage2 from "../../../assets/images/truck-1.png"
 import footerImage3 from "../../../assets/images/truck-3.png"
+import footerImage4 from "../../../assets/images/truck-2.png"
 const Footer = () => {
     return (
         <div>
             <footer>
-                <div className="border-t-4 border-red-600 space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 bg-gray-100 md:bg-white">
+                <div className="rounded-t-2xl shadow-2xs border-t-4 border-red-600 space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 bg-gray-100 md:bg-white">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                         <div>
                             <div className="text-teal-600">
@@ -14,8 +15,7 @@ const Footer = () => {
                             </div>
 
                             <p className="mt-4 max-w-xs  font-medium">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam
-                                molestias.
+                                Enjoy a safe, fast, and reliable ride booking experience anytime, anywhere.  Confirm your ride instantly and track your driver in real time.
                             </p>
 
                             <ul className="mt-8 flex gap-6">
@@ -205,14 +205,6 @@ const Footer = () => {
                 </div>
 
                 {/* image section  */}
-                {/* <div className="hidden md:block md:relative  ">
-                    <img src={footerImage} alt="" />
-                </div>
-                <div className="hidden  md:flex md:justify-around items-center bg-gray-100 z-10 relative -mt-4 h-36">
-                    <img src={footerImage2} alt="" />
-                    <img src={footerImage3} alt="" />
-                </div> */}
-
                 <div className="hidden md:block relative md:-mt-80">
                     <img src={footerImage} alt="Footer background" />
                 </div>
@@ -223,6 +215,11 @@ const Footer = () => {
                         src={footerImage2}
                         alt="Car 1"
                         className="absolute bottom-5  animate-[carMove_8s_linear_infinite]"
+                    />
+                    <img
+                        src={footerImage4}
+                        alt="Car 1"
+                        className="absolute bottom-5  animate-[carMove3_12s_linear_infinite]"
                     />
 
                     {/* Car 2 */}
@@ -243,6 +240,11 @@ const Footer = () => {
                             @keyframes carMove2 {
                                 from { right: 100%; }
                                 to { right: -200px; }
+                            }
+                            
+                            @keyframes carMove3 {
+                                0% { right: -250px; }
+                                100% { right: 100%; }
                             }
                         `}
                     </style>

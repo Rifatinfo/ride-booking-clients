@@ -104,9 +104,9 @@ const Nav = () => {
                     <li className="md:ml-10 text-lg md:my-0 my-4 relative group hidden md:block">
                         <Link
                             to="#"
-                            className="text-gray-800 hover:text-red-600 font-medium duration-300 text-lg"
+                            className="text-gray-800 flex items-center hover:text-red-600 font-medium duration-300 text-lg"
                         >
-                            More ▾
+                            More  <RiArrowDropDownLine className="text-3xl" />
                         </Link>
                         <div className="absolute left-0 top-full hidden group-hover:block w-56 bg-white shadow-lg rounded-lg p-3">
                             {moreMenu.map((item, i) => (
@@ -125,9 +125,9 @@ const Nav = () => {
                     <li className="md:hidden my-3">
                         <button
                             onClick={() => setMobileMoreOpen(!mobileMoreOpen)}
-                            className="w-full text-lg text-left text-gray-800 font-medium flex justify-between items-center"
+                            className="w-full  text-lg text-left text-gray-800 font-medium flex justify-start items-center"
                         >
-                            More ▾
+                            More <RiArrowDropDownLine className="text-3xl" />
                         </button>
                         {mobileMoreOpen && (
                             <div className="pl-4 mt-2 space-y-2">
@@ -157,17 +157,17 @@ const Nav = () => {
                     </li>
 
                     {/* Mobile button only */}
-                    <Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
-                        Sign In
-                    </Button>
+                    <Link to="/login"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
+                        Sign Up
+                    </Button></Link>
                 </ul>
 
                 {/* Right side controls */}
                 <div className="flex items-center gap-4">
                     {/* Desktop button */}
-                    <Button className="hidden md:block bg-red-600 hover:bg-red-700">
+                    <Link to="/login"><Button className="hidden md:block bg-red-600 hover:bg-red-700">
                         Sign Up
-                    </Button>
+                    </Button></Link>
 
                     {/* Profile Avatar */}
                     <UserMenu/>

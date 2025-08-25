@@ -1,4 +1,5 @@
 import App from "@/App";
+import Login from "@/pages/Login";
 import { Home } from "lucide-react";
 import { createBrowserRouter } from "react-router";
 
@@ -13,4 +14,8 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        Component: Login,
+        path: "/login",
+    }
 ]);
