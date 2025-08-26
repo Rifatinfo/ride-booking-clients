@@ -19,7 +19,7 @@ export function RiderLoginForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
-
+    
     const registerSchema = z.object({
         email: z.email(),
         password: z.string().min(8, { error: "Password is too short" }),
@@ -35,7 +35,8 @@ export function RiderLoginForm({
         },
     })
 
-    const onSubmit = (data: z.infer<typeof registerSchema>) => {
+    const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+        
         console.log(data);
     }
 
@@ -68,20 +69,6 @@ export function RiderLoginForm({
                         )}
                     />
 
-                    {/* <FormField
-                        control={form.control}
-                        name="role"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Role</FormLabel>
-                                <FormControl>
-                                    <Input readOnly
-                                     placeholder="RIDER" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    /> */}
 
                     <div className="flex flex-col gap-2">
                         <FormLabel>Role</FormLabel>

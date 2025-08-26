@@ -20,15 +20,8 @@ export function DriverLoginForm({
 }: React.ComponentProps<"form">) {
 
     const registerSchema  = z.object({
-          name: z.string().min(2, {error : "Name is too short"}).max(50),
           email : z.email(),
           password : z.string().min(8, {error : "Password is too short"}),
-          confirmPassword : z.string().min(8, {error : "Confirm Password is too short"}),
-          role : z.string().min(5, {error : "Rider Must Be "})
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message : "Password do not match",
-        path : ["confirmPassword"],
     })
 
     const form = useForm({
@@ -36,6 +29,7 @@ export function DriverLoginForm({
         defaultValues: {
             email: "",
             password: "",
+            
         },
     })
 
@@ -72,20 +66,11 @@ export function DriverLoginForm({
                         )}
                     />
 
-                    <FormField
-                        control={form.control}
-                        name="role"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Role</FormLabel>
-                                <FormControl>
-                                    <Input readOnly
-                                     placeholder="RIDER" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className="flex flex-col gap-2">
+                        <FormLabel>Role</FormLabel>
+                        <Input value="RIDER" readOnly  />
+                    </div>
+
                     <FormField
                         control={form.control}
                         name="password"
