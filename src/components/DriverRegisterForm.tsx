@@ -14,10 +14,14 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import Password from "./Password"
+import { useDriverRegisterMutation } from "@/redux/features/auth/auth.api"
+import { toast } from "sonner"
 export function DriverRegisterForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
+
+    const [driverRegister] = useDriverRegisterMutation();
 
     const registerSchema  = z.object({
           name: z.string().min(2, {error : "Name is too short"}).max(50),
@@ -42,7 +46,23 @@ export function DriverRegisterForm({
         },
     })
 
-    const onSubmit = (data : z.infer<typeof registerSchema>) => {
+    const onSubmit = async (data : z.infer<typeof registerSchema>) => {
+        const userInfo = {
+            name : data.name,
+            email : data.email,
+            password : data.password,
+            role : data.role
+        }
+        try{
+            const result = await driverRegister(userInfo).unwrap();
+            console.log(result);
+            toast.success("Driver Created Successfully");
+        }catch(error){
+          console.log(error);
+          if(error.status === 404){
+              toast.error("Invalid Credential");
+          }
+        }
         console.log(data);
     }
 
