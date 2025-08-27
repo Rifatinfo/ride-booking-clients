@@ -3,6 +3,7 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import { Home } from "lucide-react";
 import { createBrowserRouter } from "react-router";
+import VerifyFrontPage from "@/pages/VerifyFrontPage";
 
 export const router = createBrowserRouter([
     {
@@ -22,5 +23,9 @@ export const router = createBrowserRouter([
     {
         Component: Register,
         path: "/register",
+    },
+    {
+        Component: VerifyFrontPage,
+        path: "/verify",
     }
 ]);

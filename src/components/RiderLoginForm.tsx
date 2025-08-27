@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -15,11 +15,14 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import Password from "./Password"
+import { useRiderLoginMutation } from "@/redux/features/auth/auth.api"
+import { toast } from "sonner"
 export function RiderLoginForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
-    
+    const navigate = useNavigate();
+    const [riderLogin] = useRiderLoginMutation();
     const registerSchema = z.object({
         email: z.email(),
         password: z.string().min(8, { error: "Password is too short" }),
@@ -36,8 +39,28 @@ export function RiderLoginForm({
     })
 
     const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-        
-        console.log(data);
+        try {
+            const res = await riderLogin(data).unwrap();
+
+            if (res.success) {
+                toast.error("User Login Successfully");
+                navigate("/");
+            }
+            console.log(res);
+
+
+        } catch (err) {
+            console.log(err);
+            if (err?.data?.message === "Incorrect Password") {
+                toast.error("Incorrect Password");
+                return;
+            }
+            if (err.status === 400) {
+                toast.error("Your account is not verified");
+                navigate("/verify", { state: data.email });
+            }
+        }
+        console.log(data.email);
     }
 
     return (
@@ -72,7 +95,7 @@ export function RiderLoginForm({
 
                     <div className="flex flex-col gap-2">
                         <FormLabel>Role</FormLabel>
-                        <Input value="RIDER" readOnly  />
+                        <Input value="RIDER" readOnly />
                     </div>
 
                     <FormField

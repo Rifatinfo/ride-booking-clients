@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -14,10 +14,15 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import Password from "./Password"
+import { useDriverLoginMutation } from "@/redux/features/auth/auth.api"
+import { toast } from "sonner"
 export function DriverLoginForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
+
+    const navigate = useNavigate();
+    const [driverLogin] =  useDriverLoginMutation();  
 
     const registerSchema  = z.object({
           email : z.email(),
@@ -33,7 +38,19 @@ export function DriverLoginForm({
         },
     })
 
-    const onSubmit = (data : z.infer<typeof registerSchema>) => {
+    const onSubmit = async (data : z.infer<typeof registerSchema>) => {
+        try{
+           const res = await driverLogin(data).unwrap();
+           console.log(res);
+           
+        }catch(err){
+           console.log(err);
+
+           if(err.status === 401){
+             toast.error("Your account is not verified");
+             navigate("/verify", {state : data.email});
+           }
+        }
         console.log(data);
     }
 

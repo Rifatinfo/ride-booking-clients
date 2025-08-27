@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -20,7 +20,7 @@ export function DriverRegisterForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
-
+    const navigate = useNavigate();
     const [driverRegister] = useDriverRegisterMutation();
 
     const registerSchema  = z.object({
@@ -57,6 +57,7 @@ export function DriverRegisterForm({
             const result = await driverRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
+            navigate("/verify");
         }catch(error){
           console.log(error);
           if(error.status === 404){

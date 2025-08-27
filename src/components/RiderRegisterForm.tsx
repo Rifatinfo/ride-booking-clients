@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -20,6 +20,7 @@ export function RiderRegisterForm({
     className,
     ...props
 }: React.ComponentProps<"form">) {
+    const navigate = useNavigate();
     const [riderRegister] = useRiderRegisterMutation();
     const registerSchema  = z.object({
           name: z.string().min(2, {error : "Name is too short"}).max(50),
@@ -55,13 +56,13 @@ export function RiderRegisterForm({
             const result = await riderRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
+            navigate("/verify", {state : data.email});
         }catch(error){
           console.log(error);
-          if(error.status === 404){
+          if(error.status === 400){
               toast.error("Invalid Credential");
           }
         }
-        console.log(data);
         console.log(data);
     }
 
