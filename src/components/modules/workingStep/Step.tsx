@@ -25,7 +25,6 @@ export function Step() {
                         Your journey starts with just one tap.
                     </p>
 
-
                 </div>
       ),
         },
