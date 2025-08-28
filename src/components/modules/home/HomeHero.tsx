@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import heroBanner from "../../../assets/images/heroBanner.jpg"
 import { Step } from "../workingStep/Step";
+import Service from "../service/Service";
 const HomeHero = () => {
     return (
         <div>
@@ -18,8 +19,9 @@ const HomeHero = () => {
                     <img className="mx-auto" src={heroBanner} alt="" />
                 </div>
             </div>
-
+            <Service/>
             <Step/>
+            
         </div>
     );
 };
