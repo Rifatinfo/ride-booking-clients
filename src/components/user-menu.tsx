@@ -1,10 +1,8 @@
 import {
   BoltIcon,
-  BookOpenIcon,
   Layers2Icon,
   LogOutIcon,
   PinIcon,
-  UserPenIcon,
 } from "lucide-react"
 
 import {
@@ -22,10 +20,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+// import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
+// // import { toast } from "sonner"
+// import { useAppDispatch } from "@/redux/hook"
 
-export default function UserMenu() {
+type UserMenuProps = {
+  handleLogout: () => void;
+  data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any;
+  };
+};
+export default function UserMenu({handleLogout , data} : UserMenuProps) {
+
   return (
-    <DropdownMenu>
+    <div>
+      <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
           <Avatar className="w-10 h-10">
@@ -37,10 +47,10 @@ export default function UserMenu() {
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="text-foreground truncate text-sm font-medium">
-            Keith Kennedy
+            {data?.data?.name}
           </span>
           <span className="text-muted-foreground truncate text-xs font-normal">
-            k.kennedy@originui.com
+            {data?.data?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -53,10 +63,7 @@ export default function UserMenu() {
             <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
             <span>Option 2</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <BookOpenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 3</span>
-          </DropdownMenuItem>
+  
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -64,17 +71,15 @@ export default function UserMenu() {
             <PinIcon size={16} className="opacity-60" aria-hidden="true" />
             <span>Option 4</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <UserPenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 5</span>
-          </DropdownMenuItem>
+          
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
-          <span>Logout</span>
-        </DropdownMenuItem>
+         <DropdownMenuItem>
+              <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
+              <span onClick={handleLogout}>Logout</span>
+            </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
+          </DropdownMenu>
+    </div>
   )
 }

@@ -5,12 +5,20 @@ import { Link } from "react-router";
 import { Button } from "../button";
 import UserMenu from "@/components/user-menu";
 import Logo from "@/assets/icon/Logo";
+import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hook";
+import { toast } from "sonner";
 
 const Nav = () => {
     const [open, setOpen] = useState(false);
     const [mobileServiceOpen, setMobileServiceOpen] = useState(false);
     const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
-
+    const { data, isLoading } = useUserInfoQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+    });
+    //   const { data } = useUserInfoQuery(undefined);
+      const [logout] = useLogoutMutation();
+      const dispatch = useAppDispatch();
     const services = [
         { name: "Bike", desc: "Become a Rider", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/rides.png?v=26.4.20" },
         { name: "Car", desc: "Travel in Comfort", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/cars.png?v=26.4.20" },
@@ -30,12 +38,21 @@ const Nav = () => {
         "Pay Later",
     ];
 
+      const handleLogout = async () => {
+        await logout(undefined).unwrap();
+        dispatch(authApi.util.resetApiState());
+        toast.success("logout Successfully");
+        console.log("logout");
+        
+      }
+      console.log(data);
+    if (isLoading) return <p>Loading.........</p>;
     return (
         <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-white">
             <div className="flex items-center justify-between py-4 md:px-10 px-7">
                 {/* Logo */}
                 <div className="font-bold text-2xl cursor-pointer text-red-600">
-                    <Logo/>
+                    <Logo />
                 </div>
 
                 {/* Desktop & Mobile Links */}
@@ -157,7 +174,7 @@ const Nav = () => {
                     </li>
 
                     {/* Mobile button only */}
-                    <Link to="/login"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
+                    <Link to="/register"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
                         Sign Up
                     </Button></Link>
                 </ul>
@@ -165,12 +182,14 @@ const Nav = () => {
                 {/* Right side controls */}
                 <div className="flex items-center gap-4">
                     {/* Desktop button */}
-                    <Link to="/login"><Button className="hidden md:block bg-red-600 hover:bg-red-700">
-                        Sign Up
-                    </Button></Link>
+
 
                     {/* Profile Avatar */}
-                    <UserMenu/>
+                    {
+                        data?.data?.email ? <UserMenu handleLogout={handleLogout} data={data} /> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
+                            Sign Up
+                        </Button></Link>
+                    }
 
                     {/* Mobile menu toggle */}
                     <div
