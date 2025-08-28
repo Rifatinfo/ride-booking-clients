@@ -1,9 +1,9 @@
 import App from "@/App";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
-import { Home } from "lucide-react";
 import { createBrowserRouter } from "react-router";
 import VerifyFrontPage from "@/pages/VerifyFrontPage";
+import HomeHero from "@/components/modules/home/HomeHero";
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
         path: "/",
         children: [
             {
-                Component: Home,
+                Component: HomeHero,
                 path: "/",
             }
         ]
