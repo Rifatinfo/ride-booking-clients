@@ -51,6 +51,7 @@ export function RiderLoginForm({
 
         } catch (err) {
             console.log(err);
+           
             if (err?.data?.message === "Incorrect Password") {
                 toast.error("Incorrect Password");
                 return;

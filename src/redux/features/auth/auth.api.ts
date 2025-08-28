@@ -1,8 +1,8 @@
 import { baseApi } from "@/redux/baseApi"
 import type { IResponse } from "@/types";
-import type { ISendOtp } from "@/types/auth.types";
+import type { ISendOtp, IVerifyOtp } from "@/types/auth.types";
 
-const authApi = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     riderRegister: builder.mutation({
       query: (userInfo) => ({
@@ -15,7 +15,8 @@ const authApi = baseApi.injectEndpoints({
       query: (userInfo) => ({
         url: "/auth/login",
         method: "POST",
-        data: userInfo,   
+        data: userInfo,
+        invalidatesTags: ["USER"],   
       }),
     }),
     driverRegister: builder.mutation({
@@ -39,15 +40,29 @@ const authApi = baseApi.injectEndpoints({
         data: userInfo,   
       }),
     }),
-    verifyOtp: builder.mutation<IResponse<null>, ISendOtp>({
+    verifyOtp: builder.mutation<IResponse<null>, IVerifyOtp>({
       query: (userInfo) => ({
         url: "/otp/verify",
         method: "POST",
         data: userInfo,   
       }),
     }),
+    userInfo: builder.query({
+      query: () => ({
+        url: "/users/me",
+        method: "GET", 
+      }),
+      providesTags : ["USER"]
+    }),
+  logout: builder.mutation({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST", 
+      }),
+      invalidatesTags : ["USER"]
+    }),
   }),
 });
 
 
-export const { useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation} = authApi
+export const { useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
