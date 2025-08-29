@@ -168,9 +168,9 @@ const Nav = () => {
                         </a>
                     </li>
                     <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <a href="/contact" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                        <Link to="/contact" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
                             Contact
-                        </a>
+                        </Link>
                     </li>
 
                     {/* Mobile button only */}

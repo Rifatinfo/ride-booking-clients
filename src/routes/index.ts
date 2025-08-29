@@ -4,6 +4,7 @@ import Register from "@/pages/Register";
 import { createBrowserRouter } from "react-router";
 import VerifyFrontPage from "@/pages/VerifyFrontPage";
 import HomeHero from "@/components/modules/home/HomeHero";
+import ContactUs from "@/components/modules/contactUs/ContactUs";
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
             {
                 Component: HomeHero,
                 path: "/",
+            },
+            {
+                Component: ContactUs,
+                path: "/contact",
             }
         ]
     },

@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import heroBanner from "../../../assets/images/heroBanner.jpg"
 import { Step } from "../workingStep/Step";
 import Service from "../service/Service";
+import Subscription from "../subscription/Subscription";
+import Testimonial from "../testimonial/Testimonial";
+import AddTestimonial from "../testimonial/AddTestimonial";
 const HomeHero = () => {
     return (
         <div>
@@ -21,7 +24,9 @@ const HomeHero = () => {
             </div>
             <Service/>
             <Step/>
-            
+            <Subscription/>
+            <Testimonial/>
+            <AddTestimonial/>
         </div>
     );
 };
