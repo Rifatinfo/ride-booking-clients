@@ -176,6 +176,11 @@ const Nav = () => {
                             FAQ
                         </Link>
                     </li>
+                    <li className="md:ml-10 text-lg md:my-0 my-4">
+                        <Link to="/feature" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                            FEATURES
+                        </Link>
+                    </li>
 
                     {/* Mobile button only */}
                     <Link to="/register"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
