@@ -16,7 +16,6 @@ const Nav = () => {
     const { data, isLoading } = useUserInfoQuery(undefined, {
         refetchOnMountOrArgChange: true,
     });
-    //   const { data } = useUserInfoQuery(undefined);
       const [logout] = useLogoutMutation();
       const dispatch = useAppDispatch();
     const services = [
@@ -61,10 +60,10 @@ const Nav = () => {
                         }`}
                 >
                     <Link
-                        to="#"
+                        to="/"
                         className="text-gray-800 hover:text-red-600 font-medium duration-300 text-lg"
                     >
-                        Home
+                        HOME
                     </Link>
                     {/* Services Mega Menu (Desktop) */}
                     <li className="md:ml-10 text-lg md:my-0 my-4 relative group hidden md:block">
@@ -73,7 +72,7 @@ const Nav = () => {
                             to="#"
                             className="flex items-center text-gray-800 hover:text-red-600 font-medium duration-300"
                         >
-                            Services
+                            SERVICES
                             <RiArrowDropDownLine className="text-3xl" />
                         </Link>
 
@@ -123,7 +122,7 @@ const Nav = () => {
                             to="#"
                             className="text-gray-800 flex items-center hover:text-red-600 font-medium duration-300 text-lg"
                         >
-                            More  <RiArrowDropDownLine className="text-3xl" />
+                            MORE  <RiArrowDropDownLine className="text-3xl" />
                         </Link>
                         <div className="absolute left-0 top-full hidden group-hover:block w-56 bg-white shadow-lg rounded-lg p-3">
                             {moreMenu.map((item, i) => (
@@ -144,7 +143,7 @@ const Nav = () => {
                             onClick={() => setMobileMoreOpen(!mobileMoreOpen)}
                             className="w-full  text-lg text-left text-gray-800 font-medium flex justify-start items-center"
                         >
-                            More <RiArrowDropDownLine className="text-3xl" />
+                            MORE <RiArrowDropDownLine className="text-3xl" />
                         </button>
                         {mobileMoreOpen && (
                             <div className="pl-4 mt-2 space-y-2">
@@ -164,18 +163,23 @@ const Nav = () => {
                     {/* Help & Contact */}
                     <li className="md:ml-10 text-lg md:my-0 my-4">
                         <a href="/help" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            Help
+                            HELP
                         </a>
                     </li>
                     <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/contact" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            Contact
+                            CONTACT
+                        </Link>
+                    </li>
+                    <li className="md:ml-10 text-lg md:my-0 my-4">
+                        <Link to="/faq" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                            FAQ
                         </Link>
                     </li>
 
                     {/* Mobile button only */}
                     <Link to="/register"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
-                        Sign Up
+                       SIGN UP
                     </Button></Link>
                 </ul>
 
