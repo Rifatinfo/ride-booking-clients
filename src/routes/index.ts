@@ -8,9 +8,11 @@ import ContactUs from "@/components/modules/contactUs/ContactUs";
 import FAQ from "@/components/modules/faq/FAQ";
 import FeatureLayout from "@/components/modules/feature/FeatureLayout";
 import Feature from "@/components/modules/feature/Feature";
-import DriverFeature from "@/components/modules/feature/Driverfeature";
-import AdminFeature from "@/components/modules/feature/Adminfeature";
 import RiderFeature from "@/components/modules/feature/RiderFeature";
+import DriverFeature from "@/components/modules/feature/DriverFeature";
+import AdminFeature from "@/components/modules/feature/AdminFeature";
+import RideRequest from "@/components/modules/rideRequest/RideReques";
+import Tracking from "@/components/modules/tracking/Tracking";
 
 export const router = createBrowserRouter([
     {
@@ -30,12 +32,20 @@ export const router = createBrowserRouter([
                 path: "/faq",
             },
             {
+                Component : RideRequest,
+                path: "/ride",
+            },
+            {
+                Component : Tracking,
+                path: "/tracking",
+            },
+            {
                 Component: FeatureLayout,
                 path: "/feature",
                 children: [
                     {
-                        Component: Feature,     
-                        index: true             
+                        Component: Feature,
+                        index: true
                     },
                     {
                         Component: RiderFeature,
