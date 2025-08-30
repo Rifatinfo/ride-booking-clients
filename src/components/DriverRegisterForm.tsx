@@ -35,7 +35,7 @@ export function DriverRegisterForm({
         path : ["confirmPassword"],
     })
 
-    const form = useForm({
+    const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema ),
         defaultValues: {
             name: "",
@@ -57,8 +57,9 @@ export function DriverRegisterForm({
             const result = await driverRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
-            navigate("/verify");
-        }catch(error){
+            navigate("/verify", {state : data.email});
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }catch(error : any){
           console.log(error);
           if(error.status === 404){
               toast.error("Invalid Credential");
@@ -75,7 +76,7 @@ export function DriverRegisterForm({
                 {...props}
             >
                 <div className="flex flex-col items-center gap-2 text-center">
-                    <h1 className="text-2xl font-bold">Register to your Rider</h1>
+                    <h1 className="text-2xl font-bold">Register to your Driver</h1>
                     <p className="text-muted-foreground text-sm text-balance">
                         Enter your email below to Register to your account
                     </p>
@@ -144,7 +145,6 @@ export function DriverRegisterForm({
                             <FormItem>
                                 <FormLabel>Confirm Password</FormLabel>
                                 <FormControl>
-                                    {/* <Input placeholder="confirmPassword" {...field} /> */}
                                      <Password {...field}/>
                                 </FormControl>
                                 <FormMessage />

@@ -22,34 +22,44 @@ export function DriverLoginForm({
 }: React.ComponentProps<"form">) {
 
     const navigate = useNavigate();
-    const [driverLogin] =  useDriverLoginMutation();  
+    const [driverLogin] = useDriverLoginMutation();
 
-    const registerSchema  = z.object({
-          email : z.email(),
-          password : z.string().min(8, {error : "Password is too short"}),
+    const registerSchema = z.object({
+        email: z.email(),
+        password: z.string().min(8, { error: "Password is too short" }),
+        role: z.string()
     })
 
-    const form = useForm({
-        resolver: zodResolver(registerSchema ),
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             email: "",
             password: "",
-            
+            role: ""
         },
     })
 
-    const onSubmit = async (data : z.infer<typeof registerSchema>) => {
-        try{
-           const res = await driverLogin(data).unwrap();
-           console.log(res);
-           
-        }catch(err){
-           console.log(err);
+    const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+        try {
+            const res = await driverLogin(data).unwrap();
+            console.log(res);
+            if (res.success) {
+                toast.error("Driver Login Successfully");
+                navigate("/");
+            }
+            console.log(res);
 
-           if(err.status === 401){
-             toast.error("Your account is not verified");
-             navigate("/verify", {state : data.email});
-           }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err : any) {
+            console.log(err);
+            if (err?.data?.message === "Incorrect Password") {
+                toast.error("Incorrect Password");
+                return;
+            }
+            if (err.status === 401) {
+                toast.error("Your account is not verified");
+                navigate("/verify", { state: data.email });
+            }
         }
         console.log(data);
     }
@@ -80,12 +90,13 @@ export function DriverLoginForm({
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
+                            
                         )}
                     />
 
                     <div className="flex flex-col gap-2">
                         <FormLabel>Role</FormLabel>
-                        <Input value="RIDER" readOnly  />
+                        <Input value="DRIVER" readOnly />
                     </div>
 
                     <FormField
@@ -95,16 +106,15 @@ export function DriverLoginForm({
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    {/* <Input placeholder="Password" {...field} /> */}
-                                    <Password {...field}/>
+                                    <Password {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                   
-                    
-                    
+
+
+
 
                     <Button type="submit" className="w-full">Submit</Button>
 

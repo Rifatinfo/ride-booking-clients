@@ -57,7 +57,8 @@ export function RiderRegisterForm({
             console.log(result);
             toast.success("Driver Created Successfully");
             navigate("/verify", {state : data.email});
-        }catch(error){
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        }catch(error : any){
           console.log(error);
           if(error.status === 400){
               toast.error("Invalid Credential");
