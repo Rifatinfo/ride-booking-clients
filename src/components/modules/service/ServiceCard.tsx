@@ -47,7 +47,8 @@ const services = [
 
 export default function ServiceCard() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((service) => (
         <div>
         {/* slider */}
@@ -86,6 +87,7 @@ export default function ServiceCard() {
         </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }

@@ -6,6 +6,11 @@ import VerifyFrontPage from "@/pages/VerifyFrontPage";
 import HomeHero from "@/components/modules/home/HomeHero";
 import ContactUs from "@/components/modules/contactUs/ContactUs";
 import FAQ from "@/components/modules/faq/FAQ";
+import FeatureLayout from "@/components/modules/feature/FeatureLayout";
+import Feature from "@/components/modules/feature/Feature";
+import DriverFeature from "@/components/modules/feature/Driverfeature";
+import AdminFeature from "@/components/modules/feature/Adminfeature";
+import RiderFeature from "@/components/modules/feature/RiderFeature";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +28,28 @@ export const router = createBrowserRouter([
             {
                 Component: FAQ,
                 path: "/faq",
+            },
+            {
+                Component: FeatureLayout,
+                path: "/feature",
+                children: [
+                    {
+                        Component: Feature,     
+                        index: true             
+                    },
+                    {
+                        Component: RiderFeature,
+                        path: "rider-feature",
+                    },
+                    {
+                        Component: DriverFeature,
+                        path: "driver-feature",
+                    },
+                    {
+                        Component: AdminFeature,
+                        path: "admin-feature",
+                    }
+                ]
             }
         ]
     },
