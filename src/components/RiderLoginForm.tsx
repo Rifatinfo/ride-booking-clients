@@ -29,7 +29,7 @@ export function RiderLoginForm({
         role: z.string()
     })
 
-    const form = useForm({
+    const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
             email: "",
@@ -49,7 +49,8 @@ export function RiderLoginForm({
             console.log(res);
 
 
-        } catch (err) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err : any) {
             console.log(err);
            
             if (err?.data?.message === "Incorrect Password") {

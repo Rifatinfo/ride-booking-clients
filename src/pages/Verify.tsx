@@ -69,6 +69,7 @@ const Verify = () => {
             } else {
                 toast.error(res.message || "Failed to send OTP", { id: toastId });
             }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.log(err);
             toast.error(err?.data?.message || "Something went wrong", { id: toastId });
@@ -91,18 +92,19 @@ const Verify = () => {
             } else {
                 toast.error(res.message || "Invalid OTP", { id: toastId });
             }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.log(err);
             toast.error(err?.data?.message || "Verification failed", { id: toastId });
         }
     };
 
-    //! Needed - Turned off for development
-    //   useEffect(() => {
-    //     if (!email) {
-    //       navigate("/");
-    //     }
-    //   }, [email]);
+
+      useEffect(() => {
+        if (!email) {
+          navigate("/");
+        }
+      }, [email]);
 
     useEffect(() => {
         if (!email || !confirmed) {

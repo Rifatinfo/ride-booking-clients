@@ -30,7 +30,8 @@ export const authApi = baseApi.injectEndpoints({
       query: (userInfo) => ({
         url: "/auth/login",
         method: "POST",
-        data: userInfo,   
+        data: userInfo, 
+        invalidatesTags: ["USER"],   
       }),
     }),
     sendOtp: builder.mutation<IResponse<null>, ISendOtp>({
