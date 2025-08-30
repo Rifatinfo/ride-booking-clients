@@ -65,6 +65,8 @@ const Nav = () => {
                     >
                         HOME
                     </Link>
+                    
+                    
                     {/* Services Mega Menu (Desktop) */}
                     <li className="md:ml-10 text-lg md:my-0 my-4 relative group hidden md:block">
 
@@ -162,8 +164,8 @@ const Nav = () => {
 
                     {/* Help & Contact */}
                     <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <a href="/help" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            HELP
+                        <a href="/ride" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                        FIND RIDE
                         </a>
                     </li>
                     <li className="md:ml-10 text-lg md:my-0 my-4">
@@ -179,6 +181,11 @@ const Nav = () => {
                     <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/feature" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
                             FEATURES
+                        </Link>
+                    </li>
+                    <li className="md:ml-10 text-lg md:my-0 my-4">
+                        <Link to="/Tracking" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                            TRACKING
                         </Link>
                     </li>
 

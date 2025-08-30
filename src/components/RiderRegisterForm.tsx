@@ -56,6 +56,7 @@ export function RiderRegisterForm({
             const result = await riderRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
+            toast.success("Please Login Your Account");
             navigate("/verify", {state : data.email});
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }catch(error : any){
