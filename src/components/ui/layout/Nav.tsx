@@ -200,6 +200,8 @@ const Nav = () => {
                     {/* Desktop button */}
 
 
+
+
                     {/* Profile Avatar */}
                     {
                         data?.data?.email ? <UserMenu handleLogout={handleLogout} data={data} /> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
