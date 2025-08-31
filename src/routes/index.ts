@@ -13,6 +13,11 @@ import DriverFeature from "@/components/modules/feature/DriverFeature";
 import AdminFeature from "@/components/modules/feature/AdminFeature";
 import RideRequest from "@/components/modules/rideRequest/RideReques";
 import Tracking from "@/components/modules/tracking/Tracking";
+import DashboardLayout from "@/components/ui/layout/DashboardLayout";
+import { generateRoutes } from "@/utils/generateRoutes";
+import { adminSidebarItem } from "./adminSidebarItems";
+import { riderSidebarItem } from "./riderSidebbarItem";
+import { driverSidebarItem } from "./driverSidebarItem";
 
 export const router = createBrowserRouter([
     {
@@ -32,11 +37,11 @@ export const router = createBrowserRouter([
                 path: "/faq",
             },
             {
-                Component : RideRequest,
+                Component: RideRequest,
                 path: "/ride",
             },
             {
-                Component : Tracking,
+                Component: Tracking,
                 path: "/tracking",
             },
             {
@@ -62,6 +67,21 @@ export const router = createBrowserRouter([
                 ]
             }
         ]
+    },
+    {
+        Component: DashboardLayout,
+        path: "/admin",
+        children: [...generateRoutes(adminSidebarItem)]
+    },
+    {
+        Component: DashboardLayout,
+        path: "/rider",
+        children: [...generateRoutes(riderSidebarItem)]
+    },
+    {
+        Component: DashboardLayout,
+        path: "/driver",
+        children: [...generateRoutes(driverSidebarItem)]
     },
     {
         Component: Login,
