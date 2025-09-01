@@ -40,12 +40,19 @@ const RideRequest = () => {
             // navigate("");
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
+            if (error.status === 403) {
+                toast.error("No Available drives");
+            }
+            if (error.status === 404) {
+                toast.error("No Available drives");
+            }
             if (error.data.message === "No Token Received") {
                 toast.error("You Are Not LoggedIn");
             }
             if (error.status === 400) {
                 toast.error("Something Went Wrong");
             }
+
             console.log(error);
         }
         console.log(data);
