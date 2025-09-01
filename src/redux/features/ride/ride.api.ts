@@ -1,17 +1,31 @@
 import { baseApi } from "@/redux/baseApi"
 
-export const  rideApi = baseApi.injectEndpoints({
+export const rideApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     riderRequest: builder.mutation({
       query: (userInfo) => ({
         url: "/ride/request",
         method: "POST",
-        data: userInfo,   
+        data: userInfo,
       }),
     }),
-
+    allRiderRequest: builder.query({
+      query: () => ({
+        url: "/ride/request",
+        method: "GET",
+      }),
+      providesTags: ["RIDER"]
+    }),
+    updateRideStatus: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/ride/status/${id}`,
+        method: "PATCH",   
+        data: { status },  
+      }),
+      invalidatesTags : ["RIDER"]
+    }),
   }),
 });
 
 
-export const { useRiderRequestMutation} = rideApi
+export const { useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation } = rideApi
