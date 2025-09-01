@@ -7,23 +7,16 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { useAllDriverQuery, useBlockedDriverMutation, useUpdateDriverStatusMutation } from "@/redux/features/driver/driver.api";
+
+import { useAllDriverQuery,  useUpdateDriverStatusMutation } from "@/redux/features/driver/driver.api";
+import { Button } from "@/components/ui/button";
 
 const ValidDriverCheck = () => {
     const { data } = useAllDriverQuery(undefined);
     const [updateDriverStatus] = useUpdateDriverStatusMutation();
-    const [blockUser] = useBlockedDriverMutation();
     console.log(data);
 
     const displayStatus = data?.isBlocked ? "BLOCKED" : data?.status;
-    const isBlockedCheck =  data?.isBlocked;
     console.log(displayStatus);
 
     return (
@@ -57,7 +50,7 @@ const ValidDriverCheck = () => {
                                             className={`px-2 py-1 text-xs font-semibold rounded-full
                                                ${item.status === "APPROVED"
                                                     ? "bg-green-100 text-green-700"
-                                                    : displayStatus  === "BLOCKED"
+                                                    : displayStatus === "BLOCKED"
                                                         ? "bg-red-100 text-red-700"
                                                         : "bg-gray-100 text-gray-700"
                                                 }`}
@@ -66,8 +59,7 @@ const ValidDriverCheck = () => {
                                         </span>
 
                                     </TableCell>
-                                    <TableCell className="px-4 py-2 text-right">
-                                        <Select
+                                      {/* <Select
                                             defaultValue={item.status && item.status || isBlockedCheck && "BLOCKED"}
                                             onValueChange={(value) => {
                                                 if (value === "BLOCKED") {
@@ -82,9 +74,21 @@ const ValidDriverCheck = () => {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="APPROVED">APPROVED</SelectItem>
-                                                {/* <SelectItem value="BLOCKED">BLOCKED</SelectItem> */}
                                             </SelectContent>
-                                        </Select>
+                                        </Select> */}
+                                    <TableCell className="px-4 py-2 text-right">
+                                        
+
+                                        <Button
+                                            className="w-[150px]"
+                                            onClick={() => {
+                                                if (item.status === "PENDING" ) {
+                                                    updateDriverStatus({ id: item._id, status: "APPROVED" });
+                                                } 
+                                            }}
+                                        >
+                                            { item.status }
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             )

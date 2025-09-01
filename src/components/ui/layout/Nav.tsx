@@ -5,9 +5,10 @@ import { Link } from "react-router";
 import { Button } from "../button";
 import UserMenu from "@/components/user-menu";
 import Logo from "@/assets/icon/Logo";
-import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
-import { useAppDispatch } from "@/redux/hook";
-import { toast } from "sonner";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+// import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
+// import { useAppDispatch } from "@/redux/hook";
+// import { toast } from "sonner";
 
 const Nav = () => {
     const [open, setOpen] = useState(false);
@@ -16,8 +17,10 @@ const Nav = () => {
     const { data, isLoading } = useUserInfoQuery(undefined, {
         refetchOnMountOrArgChange: true,
     });
-      const [logout] = useLogoutMutation();
-      const dispatch = useAppDispatch();
+    console.log(data);
+    
+    //   const [logout] = useLogoutMutation();
+    //   const dispatch = useAppDispatch();
     const services = [
         { name: "Bike", desc: "Become a Rider", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/rides.png?v=26.4.20" },
         { name: "Car", desc: "Travel in Comfort", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/cars.png?v=26.4.20" },
@@ -37,14 +40,14 @@ const Nav = () => {
         "Pay Later",
     ];
 
-      const handleLogout = async () => {
-        await logout(undefined).unwrap();
-        dispatch(authApi.util.resetApiState());
-        toast.success("logout Successfully");
-        console.log("logout");
+    //   const handleLogout = async () => {
+    //     await logout(undefined).unwrap();
+    //     dispatch(authApi.util.resetApiState());
+    //     toast.success("logout Successfully");
+    //     console.log("logout");
         
-      }
-      console.log(data);
+    //   }
+    //   console.log(data);
     if (isLoading) return <p>Loading.........</p>;
     return (
         <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-white">
@@ -204,7 +207,7 @@ const Nav = () => {
 
                     {/* Profile Avatar */}
                     {
-                        data?.data?.email ? <UserMenu handleLogout={handleLogout} data={data} /> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
+                        data?.data?.email ? <UserMenu  /> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
                             Sign Up
                         </Button></Link>
                     }
