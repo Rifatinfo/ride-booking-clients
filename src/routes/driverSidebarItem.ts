@@ -1,14 +1,14 @@
-import Analytics from "@/pages/admin/Analytics";
+import DriverAcceptRequest from "@/pages/driver/DriverAcceptRequest";
 import type { ISidebarItem } from "@/types";
 
 export const  driverSidebarItem : ISidebarItem[] = [
     {
-        title: "Dashboard",
+        title: "Rider Related",
         items: [
           {
-            title: "Driver",
-            url: "/driver",
-            component: Analytics,
+            title: "Rider Request",
+            url: "/driver/driver-accept-request",
+            component: DriverAcceptRequest,
           },
         ],
     },
