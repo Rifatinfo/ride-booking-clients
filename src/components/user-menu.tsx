@@ -1,8 +1,8 @@
 import {
-  BoltIcon,
-  Layers2Icon,
+  LayoutDashboard,
   LogOutIcon,
-  PinIcon,
+  TrainTrackIcon,
+  UserCog,
 } from "lucide-react"
 
 import {
@@ -22,12 +22,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hook";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { baseApi } from "@/redux/baseApi";
-// import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
-// // import { toast } from "sonner"
-// import { useAppDispatch } from "@/redux/hook"
-
 
 export default function UserMenu() {
 
@@ -76,23 +72,24 @@ export default function UserMenu() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
+            {data?.data?.role === "RIDER" &&
+              <DropdownMenuItem>
+                <TrainTrackIcon size={16} className="opacity-60" aria-hidden="true" />
+                <Link to="/Tracking">Tracking</Link>
+              </DropdownMenuItem>
+            }
             <DropdownMenuItem>
-              <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
-              <span>Option 1</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
-              <span>Option 2</span>
+              <LayoutDashboard size={16} className="opacity-60" aria-hidden="true" />
+              <Link to="/"><span>Dashboard</span></Link>
             </DropdownMenuItem>
 
+            <DropdownMenuItem>
+              <UserCog size={16} className="opacity-60" aria-hidden="true" />
+              <Link to="/"><span>Edit Profile</span></Link>
+            </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <PinIcon size={16} className="opacity-60" aria-hidden="true" />
-              <span>Option 4</span>
-            </DropdownMenuItem>
-
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
