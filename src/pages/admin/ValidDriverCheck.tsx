@@ -8,11 +8,14 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import { useAllDriverQuery,  useUpdateDriverStatusMutation } from "@/redux/features/driver/driver.api";
+import { useAllDriverQuery, useUpdateDriverStatusMutation } from "@/redux/features/driver/driver.api";
 import { Button } from "@/components/ui/button";
 
 const ValidDriverCheck = () => {
-    const { data } = useAllDriverQuery(undefined);
+    const { data } = useAllDriverQuery(undefined, {
+        refetchOnFocus: true,
+        refetchOnReconnect: true,
+    });
     const [updateDriverStatus] = useUpdateDriverStatusMutation();
     console.log(data);
 
@@ -59,7 +62,7 @@ const ValidDriverCheck = () => {
                                         </span>
 
                                     </TableCell>
-                                      {/* <Select
+                                    {/* <Select
                                             defaultValue={item.status && item.status || isBlockedCheck && "BLOCKED"}
                                             onValueChange={(value) => {
                                                 if (value === "BLOCKED") {
@@ -77,17 +80,17 @@ const ValidDriverCheck = () => {
                                             </SelectContent>
                                         </Select> */}
                                     <TableCell className="px-4 py-2 text-right">
-                                        
+
 
                                         <Button
                                             className="w-[150px]"
                                             onClick={() => {
-                                                if (item.status === "PENDING" ) {
+                                                if (item.status === "PENDING") {
                                                     updateDriverStatus({ id: item._id, status: "APPROVED" });
-                                                } 
+                                                }
                                             }}
                                         >
-                                            { item.status }
+                                            {item.status}
                                         </Button>
                                     </TableCell>
                                 </TableRow>

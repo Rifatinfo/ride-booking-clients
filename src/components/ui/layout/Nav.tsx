@@ -40,14 +40,6 @@ const Nav = () => {
         "Pay Later",
     ];
 
-    //   const handleLogout = async () => {
-    //     await logout(undefined).unwrap();
-    //     dispatch(authApi.util.resetApiState());
-    //     toast.success("logout Successfully");
-    //     console.log("logout");
-        
-    //   }
-    //   console.log(data);
     if (isLoading) return <p>Loading.........</p>;
     return (
         <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-white">
@@ -186,11 +178,11 @@ const Nav = () => {
                             FEATURES
                         </Link>
                     </li>
-                    <li className="md:ml-10 text-lg md:my-0 my-4">
+                    {/* <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/Tracking" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
                             TRACKING
                         </Link>
-                    </li>
+                    </li> */}
 
                     {/* Mobile button only */}
                     <Link to="/register"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
