@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   LogOutIcon,
+  LucideBike,
   TrainTrackIcon,
   UserCog,
 } from "lucide-react"
@@ -76,6 +77,12 @@ export default function UserMenu() {
               <DropdownMenuItem>
                 <TrainTrackIcon size={16} className="opacity-60" aria-hidden="true" />
                 <Link to="/Tracking">Tracking</Link>
+              </DropdownMenuItem>
+            }
+            {data?.data?.role === "RIDER" &&
+              <DropdownMenuItem>
+                <LucideBike size={16} className="opacity-60" aria-hidden="true" />
+                <Link to={`/ride-details`}>Ride Details</Link>
               </DropdownMenuItem>
             }
             <DropdownMenuItem>

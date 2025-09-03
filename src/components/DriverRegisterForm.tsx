@@ -24,7 +24,8 @@ export function DriverRegisterForm({
     const [driverRegister] = useDriverRegisterMutation();
 
     const registerSchema  = z.object({
-          name: z.string().min(2, {error : "Name is too short"}).max(50),
+          name: z.string().min(2, {error : "Name is too short"}).max(20),
+          vehicle: z.string().min(2, {error : "vehicle is too short"}).max(20),
           email : z.email(),
           password : z.string().min(8, {error : "Password is too short"}),
           confirmPassword : z.string().min(8, {error : "Confirm Password is too short"}),
@@ -42,7 +43,8 @@ export function DriverRegisterForm({
             email: "",
             password: "",
             confirmPassword : "",
-            role : "DRIVER"
+            role : "DRIVER",
+            vehicle : ""
         },
     })
 
@@ -51,7 +53,8 @@ export function DriverRegisterForm({
             name : data.name,
             email : data.email,
             password : data.password,
-            role : data.role
+            role : data.role,
+            vehicle : data.vehicle
         }
         try{
             const result = await driverRegister(userInfo).unwrap();
@@ -119,6 +122,19 @@ export function DriverRegisterForm({
                                 <FormControl>
                                     <Input readOnly
                                      placeholder="DRIVER" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                      <FormField
+                        control={form.control}
+                        name="vehicle"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>vehicle Type</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="vehicle" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -16,6 +16,13 @@ export const rideApi = baseApi.injectEndpoints({
       }),
       providesTags: ["RIDER"]
     }),
+    singleRiderRequest: builder.query({
+      query: () => ({
+        url: "/ride/single-request",
+        method: "GET",
+      }),
+      providesTags: ["RIDER"]
+    }),
     allRideHistory: builder.query({
       query: () => ({
         url: "/ride/all-history",
@@ -35,4 +42,4 @@ export const rideApi = baseApi.injectEndpoints({
 });
 
 
-export const { useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation , useAllRideHistoryQuery} = rideApi
+export const { useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation , useAllRideHistoryQuery, useSingleRiderRequestQuery} = rideApi
