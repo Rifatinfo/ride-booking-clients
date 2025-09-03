@@ -18,6 +18,7 @@ import { generateRoutes } from "@/utils/generateRoutes";
 import { adminSidebarItem } from "./adminSidebarItems";
 import { riderSidebarItem } from "./riderSidebbarItem";
 import { driverSidebarItem } from "./driverSidebarItem";
+import RideDetails from "@/components/ui/layout/RideDetails";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 Component: Tracking,
                 path: "/tracking",
+            },
+            {
+                Component: RideDetails,
+                path: "/ride-details",
             },
             {
                 Component: FeatureLayout,

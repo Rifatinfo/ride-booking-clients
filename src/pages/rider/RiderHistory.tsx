@@ -17,7 +17,7 @@ const RiderHistory = () => {
     })
     console.log(data);
 
-    
+
     return (
         <div>
             <div className="w-full max-w-7xl mx-auto px-5">
@@ -33,11 +33,12 @@ const RiderHistory = () => {
                                 <TableHead className="px-4 py-2 text-left w-1/4">Picked</TableHead>
                                 <TableHead className="px-4 py-2 text-left w-1/6">Destination</TableHead>
                                 <TableHead className="px-4 py-2 text-left w-1/6">Status</TableHead>
+                                
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {data?.data?.map(
-                                (item: { _id: string; createdAt : string ; driverEarning: string; fare: string; status: string, pickupLocation: string, destinationLocation: string }) => (
+                                (item: { _id: string; createdAt: string; driverEarning: string; fare: string; status: string, pickupLocation: string, destinationLocation: string }) => (
                                     <TableRow
                                         key={item._id}
                                         className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
@@ -67,6 +68,7 @@ const RiderHistory = () => {
                                                 {item.status}
                                             </span>
                                         </TableCell>
+
 
                                     </TableRow>
                                 )
