@@ -21,7 +21,7 @@ const Tracking = () => {
             url: "https://i.ibb.co.com/JW76sjZ6/Rider-features.jpg",
             description: "PENDING",
         },
-        {
+        {                                                                                   
             step: 2,
             url: "https://img.freepik.com/premium-vector/lets-go-road-trip-icon-white-background-6_1119689-5163.jpg?w=1060",
             description: "REQUESTED",

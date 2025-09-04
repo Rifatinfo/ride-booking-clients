@@ -19,6 +19,7 @@ import { adminSidebarItem } from "./adminSidebarItems";
 import { riderSidebarItem } from "./riderSidebbarItem";
 import { driverSidebarItem } from "./driverSidebarItem";
 import RideDetails from "@/components/ui/layout/RideDetails";
+import Availability from "@/components/modules/availability/Availability";
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 Component: RideDetails,
                 path: "/ride-details",
+            },
+            {
+                Component: Availability,
+                path: "/available-online-offline",
             },
             {
                 Component: FeatureLayout,

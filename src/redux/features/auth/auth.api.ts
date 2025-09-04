@@ -26,6 +26,23 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,   
       }),
     }),
+    changePassword: builder.mutation({
+      query: (userInfo) => ({
+        url: "/users/change-password",
+        method: "POST",
+        data: userInfo,   
+      }),
+    }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setUserAvailability: builder.mutation<any, {isAvailable : boolean}>({
+      query: ({isAvailable}) => ({
+        url: "/users/availability",
+        method: "PATCH",
+        data: {isAvailable},   
+      }),
+      invalidatesTags : ["USER"]
+    }),
+    
     driverLogin: builder.mutation({
       query: (userInfo) => ({
         url: "/auth/login",
@@ -66,4 +83,4 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 
-export const { useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
+export const { useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi

@@ -45,7 +45,7 @@ export function DriverLoginForm({
             console.log(res);
             if (res.success) {
                 toast.error("Driver Login Successfully");
-                navigate("/");
+                navigate("/available-online-offline");
             }
             console.log(res);
 
