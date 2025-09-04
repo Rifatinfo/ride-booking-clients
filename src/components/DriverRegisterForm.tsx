@@ -60,6 +60,7 @@ export function DriverRegisterForm({
             const result = await driverRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
+            toast.success("Driver Please Login You Account");
             navigate("/verify", {state : data.email});
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }catch(error : any){

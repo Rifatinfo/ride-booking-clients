@@ -25,7 +25,10 @@ import { useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.
 import { useAppDispatch } from "@/redux/hook";
 import { Link, useNavigate } from "react-router";
 import { baseApi } from "@/redux/baseApi";
-
+export interface DashProps {
+    dashRole : UserRole
+}
+export type UserRole = "admin" | "rider" | "driver"
 export default function UserMenu() {
 
   const { data, isLoading } = useUserInfoQuery(undefined, {
@@ -50,7 +53,10 @@ export default function UserMenu() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
+  
+  const dashboardPath = `${data?.data.role}`;
+  console.log(dashboardPath);
+  
   return (
     <div>
       <DropdownMenu>
@@ -85,9 +91,15 @@ export default function UserMenu() {
                 <Link to={`/ride-details`}>Ride Details</Link>
               </DropdownMenuItem>
             }
+            {data?.data?.role === "DRIVER" &&
+              <DropdownMenuItem>
+                <LucideBike size={16} className="opacity-60" aria-hidden="true" />
+                <Link to={`/available-online-offline`}>Availability</Link>
+              </DropdownMenuItem>
+            }
             <DropdownMenuItem>
               <LayoutDashboard size={16} className="opacity-60" aria-hidden="true" />
-              <Link to="/"><span>Dashboard</span></Link>
+              <Link to={dashboardPath}><span>Dashboard</span></Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
