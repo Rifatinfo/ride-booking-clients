@@ -9,6 +9,13 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       providesTags : ["DRIVER"]
     }),
+     driverEarning : builder.query({
+      query: () => ({
+        url: "/driver/earning",
+        method: "GET" 
+      }),
+      providesTags : ["DRIVER"]
+    }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateDriverStatus: builder.mutation<any, {id : string, status : string}>({
       query: ({id, status}) => ({
@@ -31,4 +38,4 @@ export const driverApi = baseApi.injectEndpoints({
 });
 
 
-export const { useAllDriverQuery, useUpdateDriverStatusMutation, useBlockedDriverMutation} = driverApi
+export const {useDriverEarningQuery , useAllDriverQuery, useUpdateDriverStatusMutation, useBlockedDriverMutation} = driverApi
