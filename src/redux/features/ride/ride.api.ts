@@ -9,6 +9,13 @@ export const rideApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
+    adminAnalytics: builder.query({
+      query: () => ({
+        url: "/ride/analytics",
+        method: "GET",
+      }),
+      providesTags: ["RIDER"]
+    }),
     allRiderRequest: builder.query({
       query: () => ({
         url: "/ride/request",
@@ -42,4 +49,4 @@ export const rideApi = baseApi.injectEndpoints({
 });
 
 
-export const { useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation , useAllRideHistoryQuery, useSingleRiderRequestQuery} = rideApi
+export const { useAdminAnalyticsQuery ,useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation , useAllRideHistoryQuery, useSingleRiderRequestQuery} = rideApi

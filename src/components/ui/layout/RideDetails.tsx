@@ -2,7 +2,11 @@ import { useSingleRiderRequestQuery } from "@/redux/features/ride/ride.api";
 
 const RideDetails = () => {
 
-    const { data } = useSingleRiderRequestQuery(undefined)
+    const { data } = useSingleRiderRequestQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true,
+        refetchOnFocus: true,
+    })
     console.log(data);
 
     return (
@@ -15,12 +19,12 @@ const RideDetails = () => {
                     </span>
                     <span
                         className={`px-3 py-1 text-xs font-semibold rounded-full ${data?.data.status === "REQUESTED"
-                                ? "bg-yellow-200 text-yellow-800"
-                                : data?.data.status === "IN_TRANSIT"
-                                    ? "bg-blue-200 text-blue-800"
-                                    : data?.data.status === "COMPLETED"
-                                        ? "bg-green-200 text-green-800"
-                                        : "bg-gray-200 text-gray-800"
+                            ? "bg-yellow-200 text-yellow-800"
+                            : data?.data.status === "IN_TRANSIT"
+                                ? "bg-blue-200 text-blue-800"
+                                : data?.data.status === "COMPLETED"
+                                    ? "bg-green-200 text-green-800"
+                                    : "bg-gray-200 text-gray-800"
                             }`}
                     >
                         {data?.data.status}

@@ -42,6 +42,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags : ["USER"]
     }),
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     setBlockAndUnBlock: builder.mutation<any, {isBlocked : boolean, userId : string}>({
+      query: ({isBlocked, userId}) => ({
+        url: `/users/toggle-block/${userId}`,
+        method: "PATCH",
+        data: {isBlocked},   
+      }),
+      invalidatesTags : ["USER"]
+    }),
     
     driverLogin: builder.mutation({
       query: (userInfo) => ({
@@ -72,6 +81,13 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags : ["USER"]
     }),
+    allUsers: builder.query({
+      query: () => ({
+        url: "/users",
+        method: "GET", 
+      }),
+      providesTags : ["USER"]
+    }),
   logout: builder.mutation({
       query: () => ({
         url: "/auth/logout",
@@ -83,4 +99,4 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 
-export const { useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
+export const { useSetBlockAndUnBlockMutation, useAllUsersQuery,useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
