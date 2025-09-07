@@ -15,12 +15,12 @@ import { useNavigate } from "react-router";
 import MapTracking from "./MapTracking";
 const RideRequest = () => {
     const [rideRequest] = useRiderRequestMutation();
-     const { data } = useSingleRiderRequestQuery(undefined, {
-            refetchOnMountOrArgChange: true,
-            refetchOnReconnect: true,
-            refetchOnFocus: true,
-        })
-        console.log(data);
+    const { data } = useSingleRiderRequestQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true,
+        refetchOnFocus: true,
+    })
+    console.log(data);
     const navigate = useNavigate();
     const rideRequestSchema = z.object({
         pickupLocation: z.string(),
@@ -41,14 +41,20 @@ const RideRequest = () => {
             destinationLocation: data.destinationLocation,
 
         }
-
+           
         try {
-            const toastId = toast.loading("Sending Request");
+
+            // Send request
             const result = await rideRequest(userInfo).unwrap();
             console.log(result);
-            if(result.success){
-                toast.success("Ride Request In Successfully", {id : toastId});
+
+            if (result.success) {
+                // Update loading toast to success
+                toast.success("Ride Request Sent Successfully");
                 navigate("/tracking");
+            } else {
+                // If API returns success: false
+                toast.error("Ride Request Failed");
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -77,7 +83,7 @@ const RideRequest = () => {
                 {/* <div className="h-full w-full flex items-center justify-center text-gray-500">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.83187913899!2d90.33728828261802!3d23.780975727977594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1756492630267!5m2!1sen!2sbd" className="w-full min-h-screen" loading="lazy"></iframe>
                 </div> */}
-                <MapTracking/>
+                <MapTracking />
             </div>
 
             {/* Right: Ride Request Form */}
