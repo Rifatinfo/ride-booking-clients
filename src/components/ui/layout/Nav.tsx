@@ -155,9 +155,9 @@ const Nav = () => {
 
                     {/* Help & Contact */}
                     <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <a href="/ride" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
+                        <Link to="/ride" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
                         FIND RIDE
-                        </a>
+                        </Link>
                     </li>
                     <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/contact" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
