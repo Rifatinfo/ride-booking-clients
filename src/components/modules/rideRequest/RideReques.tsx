@@ -12,7 +12,6 @@ import {
 import { useRiderRequestMutation, useSingleRiderRequestQuery } from "@/redux/features/ride/ride.api";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
-import MapTracking from "./MapTracking";
 const RideRequest = () => {
     const [rideRequest] = useRiderRequestMutation();
     const { data } = useSingleRiderRequestQuery(undefined, {
@@ -80,10 +79,10 @@ const RideRequest = () => {
             {/* Left: Map */}
             <div className="lg:w-2/3 w-full h-96 lg:h-auto bg-gray-200">
                 {/* Replace this div with your actual map component (Google Maps / Leaflet / Mapbox) */}
-                {/* <div className="h-full w-full flex items-center justify-center text-gray-500">
+                 <div className="h-full w-full flex items-center justify-center text-gray-500">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.83187913899!2d90.33728828261802!3d23.780975727977594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1756492630267!5m2!1sen!2sbd" className="w-full min-h-screen" loading="lazy"></iframe>
-                </div> */}
-                <MapTracking />
+                </div> 
+                {/* <MapTracking /> */}
             </div>
 
             {/* Right: Ride Request Form */}
