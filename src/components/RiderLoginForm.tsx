@@ -61,6 +61,10 @@ export function RiderLoginForm({
                 toast.error("Your account is not verified");
                 navigate("/verify", { state: data.email });
             }
+            if (err.status === 403) {
+                toast.error("Your account is Blocked");
+                navigate("/verify", { state: data.email });
+            }
         }
         console.log(data.email);
     }
@@ -139,7 +143,7 @@ export function RiderLoginForm({
 
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link to="/register" className="underline underline-offset-4">
+                    <Link to="/register" className="underline underline-offset-4 cursor-pointer">
                         Sign Up
                     </Link>
                 </div>

@@ -6,7 +6,7 @@ const Testimonial = () => {
           <div className="flex flex-col items-center">
             <div className="text-center">
               <p className="text-lg font-medium text-gray-600 font-pj">
-                2,157 people have said how good Rareblocks
+                2,157 people have said how good Review
               </p>
               <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
                 Our happy clients say about us
@@ -20,7 +20,7 @@ const Testimonial = () => {
                 className="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"
               >
                 {" "}
-                Check all 2,157 reviews{" "}
+                Check all 100 reviews{" "}
               </a>
             </div>
 
@@ -80,9 +80,7 @@ const Testimonial = () => {
 
                       <blockquote className="flex-1 mt-8">
                         <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                          “You made it so simple. My new site is so much faster
-                          and easier to work with than my old site. I just
-                          choose the page, make the change.”
+                          “The ride was super smooth and the driver was very polite. The car was clean, comfortable, and I reached my destination right on time. Definitely the best ride-booking experience I’ve had in a while!”
                         </p>
                       </blockquote>
                     </div>
@@ -95,10 +93,10 @@ const Testimonial = () => {
                       />
                       <div className="ml-4">
                         <p className="text-base font-bold text-gray-900 font-pj">
-                          Leslie Alexander
+                          Jora
                         </p>
                         <p className="mt-0.5 text-sm font-pj text-gray-600">
-                          Freelance React Developer
+                          Freelance 
                         </p>
                       </div>
                     </div>
@@ -153,9 +151,7 @@ const Testimonial = () => {
 
                       <blockquote className="flex-1 mt-8">
                         <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                          “Simply the best. Better than all the rest. I’d
-                          recommend this product to beginners and advanced
-                          users.”
+                          “I booked a ride late at night and got matched with a driver instantly. The app kept me updated with live tracking, and the driver was very professional. Felt safe the entire journey — highly recommend!”
                         </p>
                       </blockquote>
                     </div>
@@ -171,7 +167,7 @@ const Testimonial = () => {
                           Jacob Jones
                         </p>
                         <p className="mt-0.5 text-sm font-pj text-gray-600">
-                          Digital Marketer
+                           Business Man
                         </p>
                       </div>
                     </div>
@@ -226,9 +222,7 @@ const Testimonial = () => {
 
                       <blockquote className="flex-1 mt-8">
                         <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                          “I cannot believe that I have got a brand new landing
-                          page after getting Omega. It was super easy to edit
-                          and publish.”
+                          “Affordable fares, quick pickup, and excellent service. My driver knew the best routes and avoided traffic. I’ll be using this service regularly for my daily commute”
                         </p>
                       </blockquote>
                     </div>
@@ -241,10 +235,10 @@ const Testimonial = () => {
                       />
                       <div className="ml-4">
                         <p className="text-base font-bold text-gray-900 font-pj">
-                          Jenny Wilson
+                          All Ahmed
                         </p>
                         <p className="mt-0.5 text-sm font-pj text-gray-600">
-                          Graphic Designer
+                          Student
                         </p>
                       </div>
                     </div>

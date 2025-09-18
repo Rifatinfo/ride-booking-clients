@@ -20,6 +20,9 @@ import { riderSidebarItem } from "./riderSidebbarItem";
 import { driverSidebarItem } from "./driverSidebarItem";
 import RideDetails from "@/components/ui/layout/RideDetails";
 import Availability from "@/components/modules/availability/Availability";
+import OurTeam from "@/components/modules/OurTeam/OurTeam";
+import About from "@/components/modules/AboutUs/About";
+import Emergency from "@/components/modules/emergency/Emergency";
 
 export const router = createBrowserRouter([
     {
@@ -35,8 +38,16 @@ export const router = createBrowserRouter([
                 path: "/contact",
             },
             {
+                Component: About,
+                path: "/about-us",
+            },
+            {
                 Component: FAQ,
                 path: "/faq",
+            },
+            {
+                Component: OurTeam,
+                path: "/our-team",
             },
             {
                 Component: RideRequest,
@@ -49,6 +60,10 @@ export const router = createBrowserRouter([
             {
                 Component: RideDetails,
                 path: "/ride-details",
+            },
+            {
+                Component: Emergency,
+                path: "/rider-emergency-way",
             },
             {
                 Component: Availability,

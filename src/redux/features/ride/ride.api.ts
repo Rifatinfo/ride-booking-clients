@@ -8,6 +8,11 @@ export const rideApi = baseApi.injectEndpoints({
         method: "POST",
         data: userInfo,
       }),
+      invalidatesTags: ["RIDER"],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+       await queryFulfilled;
+          dispatch(rideApi.util.invalidateTags(["RIDER"])); // force refetch
+      },
     }),
     adminAnalytics: builder.query({
       query: () => ({
@@ -40,13 +45,21 @@ export const rideApi = baseApi.injectEndpoints({
     updateRideStatus: builder.mutation({
       query: ({ id, status }) => ({
         url: `/ride/status/${id}`,
-        method: "PATCH",   
-        data: { status },  
+        method: "PATCH",
+        data: { status },
       }),
-      invalidatesTags : ["RIDER"]
+      invalidatesTags: ["RIDER"]
+    }),
+    cancelRideStatus: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/ride/rider-cancel-status/${id}`,
+        method: "PATCH",
+        data: { status },
+      }),
+      invalidatesTags: ["RIDER"]
     }),
   }),
 });
 
 
-export const { useAdminAnalyticsQuery ,useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation , useAllRideHistoryQuery, useSingleRiderRequestQuery} = rideApi
+export const { useCancelRideStatusMutation,useAdminAnalyticsQuery, useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation, useAllRideHistoryQuery, useSingleRiderRequestQuery } = rideApi

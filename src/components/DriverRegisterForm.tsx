@@ -191,7 +191,7 @@ export function DriverRegisterForm({
 
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link to="/login" className="underline underline-offset-4">
+                    <Link to="/login" className="underline underline-offset-4 cursor-pointer">
                         Sign Up
                     </Link>
                 </div>

@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm} from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
 import {
   Form,
@@ -11,22 +11,26 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { useContactRequestMutation } from "@/redux/features/contact/contact.api";
 
 const ContactForm = () => {
+  const [contactRequest] = useContactRequestMutation();
 
   const contactFormSchema = z.object({
     name: z.string().min(3, {
       message: "Username must be at least 2 characters.",
     }),
-    description: z.string().min(3, {
-      message: "Username must be at least 2 characters.",
+    description: z.string().min(10, {
+      message: "description must be at least 10 characters.",
     }),
-    email : z.string(),
-     phone : z.string().min(11, {
-      message : "Must be 11 character"
-     }),
-     comName: z.string().min(3, {
-      message: "Username must be at least 2 characters.",
+    email: z.string({ message: "Invalid email address." }),
+    phone: z.string().min(11, {
+      message: "Must be 11 character"
+    })
+      .regex(/^\d+$/, { message: "Phone must contain only numbers." }),
+    comName: z.string().min(3, {
+      message: "Company name must be at least 3 characters.",
     }),
   })
 
@@ -34,16 +38,34 @@ const ContactForm = () => {
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
-      email : "",
-      phone : "",
-      description : "",
-      comName : ""
+      email: "",
+      phone: "",
+      description: "",
+      comName: ""
     },
   })
+    const {reset} = form;
 
 
   const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
     console.log(data);
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      description: data.description,
+      comName: data.comName,
+    }
+    try {
+      const result = await contactRequest(userInfo).unwrap();
+      console.log(result);
+      toast.success("Form Create Successfully");
+      reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error)
+        toast.error("Something Error")
+    }
   }
 
   return (
@@ -80,100 +102,100 @@ const ContactForm = () => {
             Send us a message
           </h2>
           <form onSubmit={form.handleSubmit(onSubmit)} >
-           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block text-sm font-medium mb-1">Your name</FormLabel>
-              <FormControl>
-                <input
-                {...field}
-                type="text"
-                placeholder="Enter your full name"
-                className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="block text-sm font-medium mb-1">Your name</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        type="text"
+                        placeholder="Enter your full name"
+                        className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-          <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block text-sm font-medium mb-1">Email address</FormLabel>
-              <FormControl>
-                <input
-                {...field}
-                type="email"
-                placeholder="Enter your email"
-                className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="block text-sm font-medium mb-1">Email address</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        type="email"
+                        placeholder="Enter your email"
+                        className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-          <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block text-sm font-medium mb-1"> Phone number</FormLabel>
-              <FormControl>
-                <input
-                {...field}
-                type="number"
-                placeholder="Enter your phone number"
-                className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="block text-sm font-medium mb-1"> Phone number</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        type="number"
+                        placeholder="Enter your phone number"
+                        className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-          <FormField
-          control={form.control}
-          name="comName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block text-sm font-medium mb-1"> Company name</FormLabel>
-              <FormControl>
-                 <input
-                 {...field}
-                type="text"
-                placeholder="Enter your company name"
-                className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+              <FormField
+                control={form.control}
+                name="comName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="block text-sm font-medium mb-1"> Company name</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        type="text"
+                        placeholder="Enter your company name"
+                        className="w-full border rounded-md p-2 focus:ring-2 focus:ring-red-500 outline-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-          </div>
-         <div className="w-full mb-6">
-           <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem className="">
-              <FormLabel className="block text-sm font-medium mb-1">Message</FormLabel>
-              <FormControl>
-                 <Textarea
-                 {...field}
-                placeholder="Write your message..."
-                className="w-full border rounded-md p-2 h-28 focus:ring-2 focus:ring-red-500 outline-none"
-              ></Textarea>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         </div>
+            </div>
+            <div className="w-full mb-6">
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="">
+                    <FormLabel className="block text-sm font-medium mb-1">Message</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Write your message..."
+                        className="w-full border rounded-md p-2 h-28 focus:ring-2 focus:ring-red-500 outline-none"
+                      ></Textarea>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="md:col-span-2">
               <button
