@@ -22,6 +22,7 @@ import SingleImageUploader from "@/components/ui/SingleImageUploader";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useForm,   type FieldValues, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 
 const AddTestimonial = () => {
@@ -38,6 +39,7 @@ const AddTestimonial = () => {
   });
   const handleSubmit : SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    toast.success("Add Review Successfully")
   };
   return (
     <div className="w-full max-w-4xl mx-auto px-5 mt-16  mb-10">
@@ -107,7 +109,7 @@ const AddTestimonial = () => {
         </CardContent>
         <CardFooter className="flex justify-end">
           <Button type="submit" form="add-tour-form">
-            Create Testimonial
+            Create Review
           </Button>
         </CardFooter>
       </Card>

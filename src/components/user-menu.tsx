@@ -3,7 +3,6 @@ import {
   LogOutIcon,
   LucideBike,
   TrainTrackIcon,
-  UserCog,
 } from "lucide-react"
 
 import {
@@ -26,7 +25,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { Link, useNavigate } from "react-router";
 import { baseApi } from "@/redux/baseApi";
 export interface DashProps {
-    dashRole : UserRole
+  dashRole: UserRole
 }
 export type UserRole = "admin" | "rider" | "driver"
 export default function UserMenu() {
@@ -53,18 +52,17 @@ export default function UserMenu() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  
+
   const dashboardPath = `${data?.data.role}`;
   console.log(dashboardPath);
-  
+
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
             <Avatar className="w-10 h-10">
-              <AvatarImage src="https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?t=st=1756051695~exp=1756055295~hmac=68bc8506673a7be1c6a402c83987f593d4ee7e515370e106063c97a9c7eca9b4&w=1480" alt="Profile image" />
-              {/* <AvatarFallback>KK</AvatarFallback> */}
+              <AvatarImage src="https://img.freepik.com/premium-vector/user-circle-icon_1076610-46257.jpg?w=1060" alt="Profile image" />
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -80,32 +78,35 @@ export default function UserMenu() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             {data?.data?.role === "RIDER" &&
-              <DropdownMenuItem>
-                <TrainTrackIcon size={16} className="opacity-60" aria-hidden="true" />
-                <Link to="/Tracking">Tracking</Link>
-              </DropdownMenuItem>
+              <Link to="/Tracking">
+                <DropdownMenuItem>
+                  <TrainTrackIcon size={16} className="opacity-60" aria-hidden="true" />
+                  Tracking
+                </DropdownMenuItem>
+              </Link>
             }
             {data?.data?.role === "RIDER" &&
-              <DropdownMenuItem>
+              <Link to={`/ride-details`}><DropdownMenuItem>
                 <LucideBike size={16} className="opacity-60" aria-hidden="true" />
-                <Link to={`/ride-details`}>Ride Details</Link>
-              </DropdownMenuItem>
+                Ride Details
+              </DropdownMenuItem></Link>
             }
             {data?.data?.role === "DRIVER" &&
-              <DropdownMenuItem>
-                <LucideBike size={16} className="opacity-60" aria-hidden="true" />
-                <Link to={`/available-online-offline`}>Availability</Link>
-              </DropdownMenuItem>
+              <Link to={`/available-online-offline`}>
+                <DropdownMenuItem>
+                  <LucideBike size={16} className="opacity-60" aria-hidden="true" />
+                  Availability
+                </DropdownMenuItem>
+              </Link>
             }
-            <DropdownMenuItem>
-              <LayoutDashboard size={16} className="opacity-60" aria-hidden="true" />
-              <Link to={dashboardPath}><span>Dashboard</span></Link>
-            </DropdownMenuItem>
+            <Link to={dashboardPath}>
+              <DropdownMenuItem>
+                <LayoutDashboard size={16} className="opacity-60" aria-hidden="true" />
+                <span>Dashboard</span>
+              </DropdownMenuItem>
+            </Link>
 
-            <DropdownMenuItem>
-              <UserCog size={16} className="opacity-60" aria-hidden="true" />
-              <Link to="/"><span>Edit Profile</span></Link>
-            </DropdownMenuItem>
+
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>

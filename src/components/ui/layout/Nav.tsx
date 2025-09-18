@@ -16,7 +16,7 @@ const Nav = () => {
         refetchOnMountOrArgChange: true,
     });
     console.log(data);
-    
+
     const services = [
         { name: "Bike", desc: "Become a Rider", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/rides.png?v=26.4.20" },
         { name: "Car", desc: "Travel in Comfort", img: "https://pathao.com/wp-content/themes/webpathao/assets/images/menu/cars.png?v=26.4.20" },
@@ -27,14 +27,13 @@ const Nav = () => {
     ];
 
     const moreMenu = [
-        "About Us",
-        "Rentals NEW",
-        "Press Releases",
-        "Press Coverage",
-        "Press Kit",
-        "for Business",
-        "Pay Later",
+        { name: "CONTACT", path: "/contact" },
+        { name: "FAQ", path: "/faq" },
+        { name: "FEATURE", path: "/feature" },
+        { name: "ABOUT US", path: "/about-us"},
+        { name: "OUR TEAM", path: "/our-team" },
     ];
+
 
     if (isLoading) return <p>Loading.........</p>;
     return (
@@ -56,8 +55,8 @@ const Nav = () => {
                     >
                         HOME
                     </Link>
-                    
-                    
+
+
                     {/* Services Mega Menu (Desktop) */}
                     <li className="md:ml-10 text-lg md:my-0 my-4 relative group hidden md:block">
 
@@ -121,10 +120,10 @@ const Nav = () => {
                             {moreMenu.map((item, i) => (
                                 <Link
                                     key={i}
-                                    to="#"
+                                    to={item.path}
                                     className="block px-3 py-2 font-medium rounded-md text-gray-700 hover:bg-red-50 hover:text-red-600"
                                 >
-                                    {item}
+                                    {item.name}
                                 </Link>
                             ))}
                         </div>
@@ -143,10 +142,10 @@ const Nav = () => {
                                 {moreMenu.map((item, i) => (
                                     <Link
                                         key={i}
-                                        to="#"
+                                        to={item.path}
                                         className="block text-gray-700 hover:text-red-600"
                                     >
-                                        {item}
+                                        {item.name}
                                     </Link>
                                 ))}
                             </div>
@@ -156,24 +155,10 @@ const Nav = () => {
                     {/* Help & Contact */}
                     <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/ride" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                        FIND RIDE
+                            FIND RIDE
                         </Link>
                     </li>
-                    <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <Link to="/contact" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            CONTACT
-                        </Link>
-                    </li>
-                    <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <Link to="/faq" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            FAQ
-                        </Link>
-                    </li>
-                    <li className="md:ml-10 text-lg md:my-0 my-4">
-                        <Link to="/feature" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
-                            FEATURES
-                        </Link>
-                    </li>
+                    
                     {/* <li className="md:ml-10 text-lg md:my-0 my-4">
                         <Link to="/Tracking" className="text-gray-800 font-medium hover:text-red-600 duration-300 text-lg">
                             TRACKING
@@ -182,7 +167,7 @@ const Nav = () => {
 
                     {/* Mobile button only */}
                     <Link to="/register"><Button className="md:hidden mt-3 mb-40 bg-red-600 hover:bg-red-700">
-                       SIGN UP
+                        SIGN UP
                     </Button></Link>
                 </ul>
 
@@ -195,7 +180,7 @@ const Nav = () => {
 
                     {/* Profile Avatar */}
                     {
-                        data?.data?.email ? <UserMenu/> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
+                        data?.data?.email ? <UserMenu /> : <Link to="/register"><Button className="cursor-pointer hidden md:block bg-red-600 hover:bg-red-700">
                             Sign Up
                         </Button></Link>
                     }

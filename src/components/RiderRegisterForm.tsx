@@ -22,48 +22,60 @@ export function RiderRegisterForm({
 }: React.ComponentProps<"form">) {
     const navigate = useNavigate();
     const [riderRegister] = useRiderRegisterMutation();
-    const registerSchema  = z.object({
-          name: z.string().min(2, {error : "Name is too short"}).max(50),
-          email : z.email(),
-          password : z.string().min(8, {error : "Password is too short"}),
-          confirmPassword : z.string().min(8, {error : "Confirm Password is too short"}),
-          role : z.string().min(5, {error : "Rider Must Be "})
+
+    const phoneRegex = /^01[3-9]\d{8}$/;
+    const registerSchema = z.object({
+        name: z.string().min(2, { error: "Name is too short" }).max(50),
+        address: z.string().min(3, { error: "address is too short" }).max(50),
+        emergency_phone: z.string()
+            .regex(phoneRegex, { message: "Provide a valid 11-digit Bangladeshi number" }),
+        phone: z .string().regex(phoneRegex, { message: "Provide a valid 11-digit Bangladeshi number" }),
+        email: z.email(),
+        password: z.string().min(8, { error: "Password is too short" }),
+        confirmPassword: z.string().min(8, { error: "Confirm Password is too short" }),
+        role: z.string().min(5, { error: "Rider Must Be " })
     })
-    .refine((data) => data.password === data.confirmPassword, {
-        message : "Password do not match",
-        path : ["confirmPassword"],
-    })
+        .refine((data) => data.password === data.confirmPassword, {
+            message: "Password do not match",
+            path: ["confirmPassword"],
+        })
 
     const form = useForm({
-        resolver: zodResolver(registerSchema ),
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
             email: "",
             password: "",
-            confirmPassword : "",
-            role : "RIDER"
+            address : "",
+            phone : "",
+            emergency_phone : "",
+            confirmPassword: "",
+            role: "RIDER"
         },
     })
 
-    const onSubmit = async (data : z.infer<typeof registerSchema>) => {
+    const onSubmit = async (data: z.infer<typeof registerSchema>) => {
         const userInfo = {
-            name : data.name,
-            email : data.email,
-            password : data.password,
-            role : data.role
+            name: data.name,
+            address: data.address,
+            email: data.email,
+            emergency_phone: data.emergency_phone,
+            phone: data.phone,
+            password: data.password,
+            role: data.role
         }
-        try{
+        try {
             const result = await riderRegister(userInfo).unwrap();
             console.log(result);
             toast.success("Driver Created Successfully");
             toast.success("Please Login Your Account");
-            navigate("/verify", {state : data.email});
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        }catch(error : any){
-          console.log(error);
-          if(error.status === 400){
-              toast.error("Invalid Credential");
-          }
+            navigate("/verify", { state: data.email });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            console.log(error);
+            if (error.status === 400) {
+                toast.error("Invalid Credential");
+            }
         }
         console.log(data);
     }
@@ -98,6 +110,45 @@ export function RiderRegisterForm({
                     />
                     <FormField
                         control={form.control}
+                        name="address"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Address</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Address" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="emergency_phone"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Emergency Contact</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Emergency Phone" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Phone Number</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Phone" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="email"
                         render={({ field }) => (
                             <FormItem>
@@ -118,7 +169,7 @@ export function RiderRegisterForm({
                                 <FormLabel>Role</FormLabel>
                                 <FormControl>
                                     <Input readOnly
-                                     placeholder="RIDER" {...field} />
+                                        placeholder="RIDER" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -132,13 +183,13 @@ export function RiderRegisterForm({
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     {/* <Input placeholder="Password" {...field} /> */}
-                                    <Password {...field}/>
+                                    <Password {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                   
+
                     <FormField
                         control={form.control}
                         name="confirmPassword"
@@ -147,13 +198,13 @@ export function RiderRegisterForm({
                                 <FormLabel>Confirm Password</FormLabel>
                                 <FormControl>
                                     {/* <Input placeholder="confirmPassword" {...field} /> */}
-                                     <Password {...field}/>
+                                    <Password {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    
+
 
                     <Button type="submit" className="w-full">Submit</Button>
 
@@ -176,7 +227,7 @@ export function RiderRegisterForm({
 
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link to="/login" className="underline underline-offset-4">
+                    <Link to="/login" className="underline underline-offset-4 cursor-pointer">
                         Sign In
                     </Link>
                 </div>

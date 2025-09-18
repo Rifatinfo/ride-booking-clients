@@ -49,8 +49,8 @@ export function DriverLoginForm({
             }
             console.log(res);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err : any) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
             console.log(err);
             if (err?.data?.message === "Incorrect Password") {
                 toast.error("Incorrect Password");
@@ -58,6 +58,10 @@ export function DriverLoginForm({
             }
             if (err.status === 401) {
                 toast.error("Your account is not verified");
+                navigate("/verify", { state: data.email });
+            }
+            if (err.status === 403) {
+                toast.error("Your account is Blocked");
                 navigate("/verify", { state: data.email });
             }
         }
@@ -90,7 +94,7 @@ export function DriverLoginForm({
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
-                            
+
                         )}
                     />
 
@@ -137,7 +141,7 @@ export function DriverLoginForm({
 
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link to="/register" className="underline underline-offset-4">
+                    <Link to="/register" className="underline underline-offset-4 cursor-pointer">
                         Sign In
                     </Link>
                 </div>

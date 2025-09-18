@@ -33,9 +33,8 @@ const ValidDriverCheck = () => {
                         <TableRow className="bg-gray-50 dark:bg-gray-900">
                             <TableHead className="px-4 py-2 text-left w-1/4">Name</TableHead>
                             <TableHead className="px-4 py-2 text-left w-1/4">Email</TableHead>
-                            {/* <TableHead className="px-4 py-2 text-left w-1/6">IsBlocked</TableHead> */}
                             <TableHead className="px-4 py-2 text-left w-1/6">Status</TableHead>
-                            <TableHead className="px-4 py-2 text-right w-1/6">Action</TableHead>
+                            <TableHead className="px-4 py-2 text-center w-1/6">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -47,13 +46,12 @@ const ValidDriverCheck = () => {
                                 >
                                     <TableCell className="px-4 py-2 font-medium">{item.name}</TableCell>
                                     <TableCell className="px-4 py-2">{item.email}</TableCell>
-                                    {/* <TableCell className="px-4 py-2">{data?.isBlocked ? "No" : "Yes"}</TableCell> */}
                                     <TableCell className="px-4 py-2">
                                         <span
                                             className={`px-2 py-1 text-xs font-semibold rounded-full
                                                ${item.status === "APPROVED"
                                                     ? "bg-green-100 text-green-700"
-                                                    : displayStatus === "BLOCKED"
+                                                    : item.status === "SUSPENDED"
                                                         ? "bg-red-100 text-red-700"
                                                         : "bg-gray-100 text-gray-700"
                                                 }`}
@@ -62,28 +60,10 @@ const ValidDriverCheck = () => {
                                         </span>
 
                                     </TableCell>
-                                    {/* <Select
-                                            defaultValue={item.status && item.status || isBlockedCheck && "BLOCKED"}
-                                            onValueChange={(value) => {
-                                                if (value === "BLOCKED") {
-                                                    blockUser({ id: item._id, isBlocked: true });
-                                                } else {
-                                                    updateDriverStatus({ id: item._id, status: value });
-                                                }
-                                            }}
-                                        >
-                                            <SelectTrigger className="w-[150px]">
-                                                <SelectValue placeholder="Select Status" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="APPROVED">APPROVED</SelectItem>
-                                            </SelectContent>
-                                        </Select> */}
-                                    <TableCell className="px-4 py-2 text-right">
-
-
+                                    
+                                    <TableCell className="px-4 py-2 text-right flex gap-1.5 justify-end">
                                         <Button
-                                            className="w-[150px]"
+                                            className={`${item.status === "SUSPENDED" ? "bg-red-600" : "bg-green-600"}`}
                                             onClick={() => {
                                                 if (item.status === "PENDING") {
                                                     updateDriverStatus({ id: item._id, status: "APPROVED" });
@@ -91,6 +71,17 @@ const ValidDriverCheck = () => {
                                             }}
                                         >
                                             {item.status}
+                                        </Button>
+                                        <Button
+                                           
+                                            onClick={() => {
+                                                if (item.status === "PENDING") {
+                                                    updateDriverStatus({ id: item._id, status: "SUSPENDED" });
+                                                }
+                                            }}
+                                            disabled={item.status !== "PENDING"}
+                                        >
+                                              {item.status === "PENDING" ? "SUSPENDED" : item.status} 
                                         </Button>
                                     </TableCell>
                                 </TableRow>

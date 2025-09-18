@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# 🚖 Ride Sharing App (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **React + Tailwind CSS + Redux Toolkit** frontend for the Ride Sharing System.  
+Users can request rides, drivers can accept them, and admins can manage everything from a responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+👉 [Live App Here](https://your-live-link.com)  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*(Replace with your actual deployed link, e.g., Vercel or Netlify)*
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🔑 Test Login Credentials
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 👤 Rider
+- **Email:** user@example.com  
+- **Password:** 123456  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🚗 Driver
+- **Email:** driver@example.com  
+- **Password:** 123456  
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 🛠️ Admin
+- **Email:** admin@example.com  
+- **Password:** 123456  
+
+*(You can change these in your seed data or backend database.)*
+
+---
+
+## 🛠️ How It Works
+
+### 👤 User Flow
+1. Register or login as **User**.  
+2. Enter **pickup** and **destination** to request a ride.  
+3. Wait until a **driver accepts the ride**.  
+4. Track ride progress:  
+   - `Requested → Accepted → Picked Up → In Transit → Completed`  
+5. Make payment after ride completion.  
+6. Cancel rides if needed (before acceptance).  
+
+---
+
+### 🚗 Driver Flow
+1. Register or login as **Driver**.  
+2. Admin must **approve the driver account** before login access.  
+3. Once approved, the driver can:  
+   - View available ride requests.  
+   - Accept or reject rides.  
+   - Update ride status (Accepted → Picked Up → In Transit → Completed).  
+
+---
+
+### 🛠️ Admin Flow
+1. Login as **Admin**.  
+2. Approve or block drivers from the dashboard.  
+3. Manage all users (block/unblock accounts).  
+4. View ride history, monitor transactions, and handle disputes.  
+
+---
+
+## ✨ Features
+
+- **Role-based Authentication** (User / Driver / Admin)  
+- **Ride Booking System** with real-time status  
+- **Driver Approval System** (Admin controlled)  
+- **Block/Unblock Users & Drivers**  
+- **Ride History** for Users & Drivers  
+- **Payment Tracking** (`UNPAID → PAID`)  
+- **Responsive UI** with Tailwind CSS  
+
+---
+
+## ⚙️ Tech Stack
+
+- **React** (Vite)  
+- **Redux Toolkit & RTK Query**  
+- **React Router v6**  
+- **Tailwind CSS**  
+- **React Hook Form + Zod**  
+  
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/yourusername/ride-sharing-frontend.git
+cd ride-sharing-frontend
+npm install
+npm run dev

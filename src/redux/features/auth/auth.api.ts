@@ -33,6 +33,13 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,   
       }),
     }),
+    updateEmergencyPhone: builder.mutation({
+      query: (emergency_phone) => ({
+        url: "/users/me/change",
+        method: "PATCH",
+        data: {emergency_phone},   
+      }),
+    }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setUserAvailability: builder.mutation<any, {isAvailable : boolean}>({
       query: ({isAvailable}) => ({
@@ -99,4 +106,4 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 
-export const { useSetBlockAndUnBlockMutation, useAllUsersQuery,useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
+export const { useUpdateEmergencyPhoneMutation,useSetBlockAndUnBlockMutation, useAllUsersQuery,useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
