@@ -10,8 +10,8 @@ export const rideApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["RIDER"],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
-       await queryFulfilled;
-          dispatch(rideApi.util.invalidateTags(["RIDER"])); // force refetch
+        await queryFulfilled;
+        dispatch(rideApi.util.invalidateTags(["RIDER"])); // force refetch
       },
     }),
     adminAnalytics: builder.query({
@@ -35,11 +35,27 @@ export const rideApi = baseApi.injectEndpoints({
       }),
       providesTags: ["RIDER"]
     }),
+    // allRideHistory: builder.query({
+    //   query: () => ({
+    //     url: "/ride/all-history",
+    //     method: "GET",
+    //   }),
+    //   providesTags: ["RIDER"]
+    // }),
     allRideHistory: builder.query({
-      query: () => ({
-        url: "/ride/all-history",
-        method: "GET",
-      }),
+      query: (filters) => {
+        const params = new URLSearchParams();
+        if (filters.status) params.append("status", filters.status);
+        if (filters?.search) params.append("search", filters.search);
+        if (filters?.startDate) params.append("startDate", filters.startDate);
+        if (filters?.endDate) params.append("endDate", filters.endDate);
+        if (filters?.page) params.append("page", filters.page.toString());
+        if (filters?.limit) params.append("limit", filters.limit.toString());
+        return {
+          url: `/ride/all-history?${params.toString()}`,
+          method: "GET",
+        }
+      },
       providesTags: ["RIDER"]
     }),
     updateRideStatus: builder.mutation({
@@ -62,4 +78,4 @@ export const rideApi = baseApi.injectEndpoints({
 });
 
 
-export const { useCancelRideStatusMutation,useAdminAnalyticsQuery, useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation, useAllRideHistoryQuery, useSingleRiderRequestQuery } = rideApi
+export const { useCancelRideStatusMutation, useAdminAnalyticsQuery, useRiderRequestMutation, useAllRiderRequestQuery, useUpdateRideStatusMutation, useAllRideHistoryQuery, useSingleRiderRequestQuery } = rideApi

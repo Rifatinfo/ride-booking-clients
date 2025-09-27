@@ -8,10 +8,19 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { useAllRideHistoryQuery } from "@/redux/features/ride/ride.api";
-
+import { useState } from "react";
+// import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const RiderHistory = () => {
-    const { data } = useAllRideHistoryQuery(undefined, {
+    const [filters, setFilters] = useState({
+        status: "REQUESTED",
+        search: "",
+        startDate: "",
+        endDate: "",
+    });
+    const { data } = useAllRideHistoryQuery(filters, {
         refetchOnFocus: true,
         refetchOnReconnect: true,
     })
@@ -21,8 +30,68 @@ const RiderHistory = () => {
     return (
         <div>
             <div className="w-full max-w-7xl mx-auto px-5">
-                <div className="flex justify-between my-8">
-                    <h1 className="text-xl font-semibold">Rider Request Accept</h1>
+                <div className=" my-8">
+                    <h1 className="text-2xl font-semibold text-center">Rider Request Accept</h1>
+                </div>
+                <div className="mt-10 flex flex-row item-center justify-center gap-4 mb-10">
+                    {/* Status */}
+                    <div className="text-center">
+                        <label className="text-sm font-medium">Status</label>
+                        <Select
+                            value={filters.status || ""}
+                            onValueChange={(value) =>
+                                setFilters({ ...filters, status: value })
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="REQUESTED">REQUESTED</SelectItem>
+                                <SelectItem value="COMPLETED">COMPLETED</SelectItem>
+                                <SelectItem value="CANCEL_BY_DRIVER">CANCEL_BY_DRIVER</SelectItem>
+                                <SelectItem value="CANCEL_BY_RIDER">CANCEL_BY_RIDER</SelectItem>
+                                <SelectItem value="IN_TRANSIT">IN_TRANSIT</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    {/* Search */}
+                    <div className="text-center">
+                        <label className="text-sm font-medium">Search</label>
+                        <Input
+                            placeholder="Search by location"
+                            value={filters.search}
+                            onChange={(e) =>
+                                setFilters({ ...filters, search: e.target.value })
+                            }
+                        />
+                    </div>
+
+                    {/* Date From */}
+                    <div className="text-center">
+                        <label className="text-sm font-medium ">From</label>
+                        <Input
+                           className="w-full"
+                            type="date"
+                            value={filters.startDate}
+                            onChange={(e) =>
+                                setFilters({ ...filters, startDate: e.target.value })
+                            }
+                        />
+                    </div>
+
+                    {/* Date To */}
+                    <div className="text-center">
+                        <label className="text-sm font-medium ">To</label>
+                        <Input
+                            type="date"
+                            value={filters.endDate}
+                            onChange={(e) =>
+                                setFilters({ ...filters, endDate: e.target.value })
+                            }
+                        />
+                    </div>
                 </div>
                 <div className="border border-muted rounded-lg overflow-hidden">
                     <Table>
@@ -33,7 +102,7 @@ const RiderHistory = () => {
                                 <TableHead className="px-4 py-2 text-left w-1/4">Picked</TableHead>
                                 <TableHead className="px-4 py-2 text-left w-1/6">Destination</TableHead>
                                 <TableHead className="px-4 py-2 text-left w-1/6">Status</TableHead>
-                                
+
                             </TableRow>
                         </TableHeader>
                         <TableBody>

@@ -19,7 +19,7 @@ const DriverEarning = () => {
         refetchOnReconnect: true,
         refetchOnFocus: true,
     });
-    console.log(data);
+    console.log(data?.data);
     const data_graph = [
         { name: 'Total Rides', total: data?.data?.totalRides },
         { name: 'Total Earning', total: data?.data?.totalEarnings },
@@ -69,7 +69,7 @@ const DriverEarning = () => {
             <div>
                 <div className="w-full max-w-7xl mx-auto px-5">
                     <div className="flex justify-between my-8">
-                        <h1 className="text-xl font-semibold">Rider History</h1>
+                        <h1 className="text-xl font-semibold text-red-500">Driver History</h1>
                     </div>
                     <div className="border border-muted rounded-lg overflow-hidden">
                         <Table>
@@ -79,8 +79,8 @@ const DriverEarning = () => {
                                     <TableHead className="px-4 py-2 text-left w-1/4">driverEarning</TableHead>
                                     <TableHead className="px-4 py-2 text-left w-1/4">Picked</TableHead>
                                     <TableHead className="px-4 py-2 text-left w-1/6">Destination</TableHead>
-                                    <TableHead className="px-4 py-2 text-left w-1/4">Name</TableHead>
-                                    <TableHead className="px-4 py-2 text-left w-1/4">Email</TableHead>
+                                    <TableHead className="px-4 py-2 text-left w-1/6">Status</TableHead>
+                                    
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -94,8 +94,7 @@ const DriverEarning = () => {
                                             <TableCell className="px-4 py-2 font-medium">{item.driverEarning}</TableCell>
                                             <TableCell className="px-4 py-2 font-medium">{item.pickupLocation}</TableCell>
                                             <TableCell className="px-4 py-2">{item.destinationLocation}</TableCell>
-                                            <TableCell className="px-4 py-2 font-medium">{item.riderId.name}</TableCell>
-                                            <TableCell className="px-4 py-2 font-medium">{item.riderId.email}</TableCell>
+                                            <TableCell className="px-4 py-2 bg-green-700 rounded-4xl text-white font-semibold">{item.status}</TableCell>
                                             
                                         </TableRow>
                                     )

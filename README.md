@@ -7,9 +7,18 @@ Users can request rides, drivers can accept them, and admins can manage everythi
 
 ## 🚀 Live Demo
 
-👉 [Live App Here](https://your-live-link.com)  
+👉 Frontend 
+```
+https://ride-booking-clients.vercel.app
 
-*(Replace with your actual deployed link, e.g., Vercel or Netlify)*
+```
+👉 Backend 
+
+```
+https://ride-booking-system-server.vercel.app/api
+
+```
+
 
 ---
 
@@ -17,18 +26,18 @@ Users can request rides, drivers can accept them, and admins can manage everythi
 
 
 ### 👤 Rider
-- **Email:** user@example.com  
-- **Password:** 123456  
+- **Email:**   
+- **Password:**  
 
 ### 🚗 Driver
-- **Email:** driver@example.com  
-- **Password:** 123456  
+- **Email:**  
+- **Password:**
 
 ### 🛠️ Admin
-- **Email:** admin@example.com  
-- **Password:** 123456  
+- **Email:** mdrifathossainsinfo@gmail.com  
+- **Password:** 12345678  
 
-*(You can change these in your seed data or backend database.)*
+
 
 ---
 
@@ -86,10 +95,4 @@ Users can request rides, drivers can accept them, and admins can manage everythi
 
 ---
 
-## 📦 Installation
 
-```bash
-git clone https://github.com/yourusername/ride-sharing-frontend.git
-cd ride-sharing-frontend
-npm install
-npm run dev

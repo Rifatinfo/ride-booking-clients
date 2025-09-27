@@ -33,6 +33,14 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,   
       }),
     }),
+    editProfile: builder.mutation({
+      query: (userInfo) => ({
+        url: "/users/me",
+        method: "PUT",
+        data: userInfo,   
+      }),
+      invalidatesTags: ["USER"], 
+    }),
     updateEmergencyPhone: builder.mutation({
       query: (emergency_phone) => ({
         url: "/users/me/change",
@@ -86,7 +94,7 @@ export const authApi = baseApi.injectEndpoints({
         url: "/users/me",
         method: "GET", 
       }),
-      providesTags : ["USER"]
+      providesTags: ["USER"],
     }),
     allUsers: builder.query({
       query: () => ({
@@ -106,4 +114,4 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 
-export const { useUpdateEmergencyPhoneMutation,useSetBlockAndUnBlockMutation, useAllUsersQuery,useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
+export const { useEditProfileMutation,useUpdateEmergencyPhoneMutation,useSetBlockAndUnBlockMutation, useAllUsersQuery,useSetUserAvailabilityMutation, useChangePasswordMutation, useRiderRegisterMutation , useDriverRegisterMutation, useDriverLoginMutation, useRiderLoginMutation, useSendOtpMutation , useVerifyOtpMutation, useUserInfoQuery, useLogoutMutation} = authApi
