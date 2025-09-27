@@ -14,12 +14,14 @@ import { toast } from "sonner";
 
 const Tracking = () => {
 
-    const { data } = useSingleRiderRequestQuery(undefined, {
-        refetchOnFocus: true,
+    const { data , refetch} = useSingleRiderRequestQuery(undefined, {
+        refetchOnMountOrArgChange: true,
         refetchOnReconnect: true,
+        refetchOnFocus: true,
     });
-        const [cancelRideStatus] = useCancelRideStatusMutation();
     
+    const [cancelRideStatus] = useCancelRideStatusMutation();
+
     const steps = [
         {
             step: 1,
@@ -75,19 +77,20 @@ const Tracking = () => {
 
         <div className="min-h-screen">
             <div className="mt-[150px] mb-[80px] text-center gap-2.5 flex flex-col md:p-0 p-10 md:flex-row justify-around">
-                {["ACCEPTED", "PICKED", "IN_TRANSIT","REQUESTED","PENDING", "COMPLETED","CANCEL_BY_RIDER","CANCEL_BY_DRIVER"].includes(data?.data?.status) && (
+                {["ACCEPTED", "PICKED", "IN_TRANSIT", "REQUESTED", "PENDING", "COMPLETED", "CANCEL_BY_RIDER", "CANCEL_BY_DRIVER"].includes(data?.data?.status) && (
                     <Link to="/rider-emergency-way"><Button className="cursor-pointer">Emergency</Button></Link>
                 )}
-                {["REQUESTED","ACCEPTED", "PICKED", "IN_TRANSIT"].includes(data?.data?.status) && (
+                {["REQUESTED", "ACCEPTED", "PICKED", "IN_TRANSIT"].includes(data?.data?.status) && (
                     <Button className="cursor-pointer" onClick={() => {
-                        cancelRideStatus({id : data?.data?._id, status : "CANCEL_BY_RIDER"})
-                        .unwrap()
-                        .then((res) => {
-                            console.log("Ride cancel : ", res)
-                            toast.success("Ride Cancel Successfully");
-                        }).catch((err) => {
-                            console.log("Ride Error : ", err);
-                        })
+                        cancelRideStatus({ id: data?.data?._id, status: "CANCEL_BY_RIDER" })
+                            .unwrap()
+                            .then((res) => {
+                                console.log("Ride cancel : ", res)
+                                toast.success("Ride Cancel Successfully");
+                                refetch();
+                            }).catch((err) => {
+                                console.log("Ride Error : ", err);
+                            })
                     }}>Cancel Ride</Button>
                 )}
                 {["COMPLETED"].includes(data?.data?.status) && (
@@ -98,7 +101,7 @@ const Tracking = () => {
             <div className="flex items-center justify-center min-h-3/4 mb-[50px] md:mt-[150px]">
                 <div className="w-full">
                     <div className="space-y-8 text-center">
-                        <Stepper  value={currentStep}>
+                        <Stepper value={currentStep}>
                             {steps.map(({ step, description, url }) => (
                                 <StepperItem
                                     key={step}
@@ -123,7 +126,7 @@ const Tracking = () => {
                         </Stepper>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 

@@ -91,7 +91,7 @@ const DriverAcceptRequest = () => {
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="ACCEPTED">ACCEPTED</SelectItem>
-                                                    <SelectItem value="PICKED">PICKED</SelectItem>
+                                                    {/* <SelectItem value="PICKED">PICKED</SelectItem> */}
                                                     <SelectItem value="IN_TRANSIT">IN_TRANSIT</SelectItem>
                                                     <SelectItem value="COMPLETED">COMPLETED</SelectItem>
                                                     <SelectItem value="CANCEL_BY_DRIVER">CANCEL_BY_DRIVER</SelectItem>

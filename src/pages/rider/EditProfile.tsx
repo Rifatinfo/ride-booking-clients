@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -11,43 +12,33 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import Password from "@/components/Password"
-import { useChangePasswordMutation } from "@/redux/features/auth/auth.api"
 import { toast } from "sonner"
-const ProfileManagement = () => {
-    const [changePassword] = useChangePasswordMutation();
-    const changePasswordSchema = z.object({
-        oldPassword: z.string().min(8, { error: "Password is too short" }),
-        newPassword: z.string().min(8, { error: "Confirm Password is too short" }),
+import { Input } from "@/components/ui/input"
+import { useEditProfileMutation } from "@/redux/features/auth/auth.api"
+const EditProfile = () => {
+    const [editProfile] = useEditProfileMutation();
+
+    const editProfileSchema = z.object({
         username: z.string().min(3, { error: "Confirm username is too short" }),
         phone: z.string().min(11, { error: "Confirm phone is too short" }),
-        confirmPassword: z.string().min(8, { error: "Confirm Password is too short" }),
-
     })
-        .refine((data) => data.newPassword === data.confirmPassword, {
-            message: "Password do not match",
-            path: ["confirmPassword"],
-        })
 
     const form = useForm({
-        resolver: zodResolver(changePasswordSchema),
+        resolver: zodResolver(editProfileSchema),
         defaultValues: {
-            oldPassword: "",
-            newPassword: "",
-            confirmPassword: "",
-          
+            username: "",
+            phone: ""
         },
     })
-    const {reset} = form;
+    const { reset } = form;
 
-    const onSubmit = async (data: z.infer<typeof changePasswordSchema>) => {
+    const onSubmit = async (data: z.infer<typeof editProfileSchema>) => {
         const userInfo = {
-            oldPassword: data.oldPassword,
-            newPassword: data.newPassword,
-        
-        }
+            name: data.username,  // must match backend field
+            phone: data.phone,
+        };
         try {
-            const result = await changePassword(userInfo).unwrap();
+            const result = await editProfile(userInfo).unwrap();
             console.log(result);
             toast.success("Successfully Update User");
             reset();
@@ -69,48 +60,36 @@ const ProfileManagement = () => {
                         className={cn("flex flex-col gap-6 w-full max-w-md space-y-4 mt-16")}
                     >
                         <div className="grid gap-6">
-                            <FormField
-                                control={form.control}
-                                name="oldPassword"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>oldPassword</FormLabel>
-                                        <FormControl>
-                                            <Password {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="newPassword"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>newPassword</FormLabel>
-                                        <FormControl>
-                                            <Password {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
 
+
+                            {/* name  */}
                             <FormField
                                 control={form.control}
-                                name="confirmPassword"
+                                name="username"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
+                                        <FormLabel>New Name</FormLabel>
                                         <FormControl>
-                                            <Password {...field} />
+                                            <Input {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
-                           
-                        
+                            {/* phone */}
+                            <FormField
+                                control={form.control}
+                                name="phone"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>New Phone</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
 
                             <Button type="submit" className="w-full cursor-pointer">Submit</Button>
@@ -122,4 +101,4 @@ const ProfileManagement = () => {
     );
 };
 
-export default ProfileManagement;
+export default EditProfile;

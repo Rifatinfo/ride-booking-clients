@@ -1,5 +1,5 @@
 import top_banner1 from '../../../assets/images/riderRegister_2.avif'
-import MissionVision from './missionVision';
+import MissionVision from './MissionVision';
 const About = () => {
     return (
         <div>

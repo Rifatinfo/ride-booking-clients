@@ -8,15 +8,16 @@ import { Button } from "@/components/ui/button";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpdateEmergencyPhoneMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { useEditProfileMutation,  useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
 const Emergency = () => {
-    const { data } = useUserInfoQuery(undefined, {
+    const { data , refetch } = useUserInfoQuery(undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnReconnect: true,
         refetchOnFocus: true,
     });
-    const [updateEmergencyPhone] = useUpdateEmergencyPhoneMutation();
+        const [editProfile] = useEditProfileMutation();
+    
     const handleShareLocation = () => {
         let mapsLink = "https://www.google.com/maps?q=23.8103,90.4125";
 
@@ -54,9 +55,9 @@ const Emergency = () => {
         const userInfo = {
             emergency_phone: data.emergency_phone,
         }
-        await updateEmergencyPhone(userInfo);
+        await editProfile(userInfo);
         toast.success("Emergency number updated");
-
+        refetch();
         console.log(data, userInfo);
     }
 
