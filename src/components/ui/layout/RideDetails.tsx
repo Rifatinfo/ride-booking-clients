@@ -15,7 +15,7 @@ const RideDetails = () => {
                 {/* Ride Status */}
                 <div className="flex justify-between items-center mb-4">
                     <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Requested: {new Date(data?.data.requestedAt).toLocaleString()}
+                        Requested: {data?.data?.requestedAt ? new Date(data.data.requestedAt).toLocaleString() : "Not Yet Request"}
                     </span>
                     <span
                         className={`px-3 py-1 text-xs font-semibold rounded-full ${data?.data.status === "REQUESTED"
@@ -34,11 +34,11 @@ const RideDetails = () => {
                 {/* Pickup & Destination */}
                 <div className="mb-4">
                     <p className="text-gray-600 dark:text-gray-300">
-                        <span className="font-semibold">Pickup:</span> {data?.data.pickupLocation}
+                        <span className="font-semibold">Pickup:</span> {data?.data?.pickupLocation ? data.data.pickupLocation : "Not yet"}
                     </p>
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
                         <span className="font-semibold">Destination:</span>{" "}
-                        {data?.data.destinationLocation}
+                        {data?.data?.destinationLocation ? data.data.destinationLocation : "Not yet"}
                     </p>
                 </div>
 
@@ -46,10 +46,10 @@ const RideDetails = () => {
                 <div className="flex justify-between items-center mb-4">
                     <div>
                         <p className="text-gray-700 dark:text-gray-200 font-medium">
-                            Fare: ${data?.data.fare}
+                            Fare: ${data?.data.fare ? data?.data.fare : "0"}
                         </p>
                         <p className="text-gray-500 dark:text-gray-400 text-sm">
-                            Driver earning: ${data?.data.driverEarning}
+                            Driver earning: ${data?.data.driverEarning ? data?.data.driverEarning : "0"}
                         </p>
                     </div>
                 </div>

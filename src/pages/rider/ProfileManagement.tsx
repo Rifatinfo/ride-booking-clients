@@ -14,7 +14,9 @@ import {
 import Password from "@/components/Password"
 import { useChangePasswordMutation } from "@/redux/features/auth/auth.api"
 import { toast } from "sonner"
+
 const ProfileManagement = () => {
+    
     const [changePassword] = useChangePasswordMutation();
     const changePasswordSchema = z.object({
         oldPassword: z.string().min(8, { error: "Password is too short" }),
@@ -35,16 +37,16 @@ const ProfileManagement = () => {
             oldPassword: "",
             newPassword: "",
             confirmPassword: "",
-          
+
         },
     })
-    const {reset} = form;
-
+    const { reset } = form;
+    
     const onSubmit = async (data: z.infer<typeof changePasswordSchema>) => {
         const userInfo = {
             oldPassword: data.oldPassword,
             newPassword: data.newPassword,
-        
+
         }
         try {
             const result = await changePassword(userInfo).unwrap();
@@ -62,6 +64,10 @@ const ProfileManagement = () => {
 
         <div>
             <h1 className="text-xl text-gray-500">Profile Management</h1>
+
+            
+
+
             <div>
                 <Form {...form} >
                     <form
@@ -109,8 +115,8 @@ const ProfileManagement = () => {
                                     </FormItem>
                                 )}
                             />
-                           
-                        
+
+
 
 
                             <Button type="submit" className="w-full cursor-pointer">Submit</Button>

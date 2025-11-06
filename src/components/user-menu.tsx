@@ -74,6 +74,9 @@ export default function UserMenu() {
             <span className="text-muted-foreground truncate text-xs font-normal">
               {data?.data?.email}
             </span>
+            <span className="text-muted-foreground truncate text-xs font-normal">
+              {data?.data?.phone}
+            </span>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
