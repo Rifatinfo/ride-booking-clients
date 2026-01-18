@@ -26,16 +26,16 @@ https://ride-booking-system-server.vercel.app/api
 
 
 ### 👤 Rider
-- **Email:**   
-- **Password:**  
+- **Email:** realostyles@gmail.com
+- **Password:** 123456789
 
 ### 🚗 Driver
-- **Email:**  
-- **Password:**
+- **Email:** mdrifathossainprogrammingroup@gmail.com
+- **Password:**  12345678
 
 ### 🛠️ Admin
 - **Email:** mdrifathossainsinfo@gmail.com  
-- **Password:** 12345678  
+- **Password:** 12345678
 
 
 
